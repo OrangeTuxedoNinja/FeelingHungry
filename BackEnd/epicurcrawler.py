@@ -38,13 +38,15 @@ class Crawler:
             if img is not None:
                 if "srcset" not in img.attrs:
                     print(img)
-                iurl = img["srcset"]
+                    iurl = img["data-srcset"]
+                else:
+                    iurl = img["srcset"]
             else:
                 print("No image found!")
                 print(url)
-                print(recipe_bs.find_all("img"))
+                # print(recipe_bs.find_all("img"))
                 iurl = "https://elitescreens.com/images/product_album/no_image.png"
-            html_recipe = recipe_bs.select(".recipe-content")
+            html_recipe = recipe_bs.select(".recipe-content")[0].text
             food = Food(f_name, iurl, url, html_recipe)
             foods.append(food)
         return foods
