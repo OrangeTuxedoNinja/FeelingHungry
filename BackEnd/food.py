@@ -6,6 +6,7 @@ import urllib.parse
 import re
 from random import randint
 
+
 class Food:
     _id_counter = 0
 
