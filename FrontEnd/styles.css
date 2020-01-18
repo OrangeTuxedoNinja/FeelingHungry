@@ -20,11 +20,11 @@ input[type=text] {
   border: 0px;
   border-radius: 0px;
   font-size: 4VW;
-  border-bottom: 4px solid black;
+  border-bottom: 0.25VW solid black;
   background-color: transparent;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  padding: 12px 12px 12px 12px;
+  padding: 1VW 1VW 1VW 1VW;
 }
 
 ::placeholder {

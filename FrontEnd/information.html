@@ -29,19 +29,18 @@ id = "2"></iframe>
 
 
 <script>
+var server = "http://35.203.43.136"
+var local = "http://0.0.0.0"
+var baseUrl = local
+
 var a = window.location.href.split("=")
-var url = "http://35.203.43.136:6969/api/food/" + window.location.href.split("=")[a.length - 1];
-console.log(url)
+var url = baseUrl + ":6969/api/food/" + window.location.href.split("=")[a.length - 1];
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, false);
 xmlHttp.send(null);
-console.log(xmlHttp.responseText)
 var info = JSON.parse(xmlHttp.responseText);
 
-console.log(info)
-
 document.getElementById(0).innerHTML=info["name"];
-console.log("https://www.google.com/maps/embed/v1/search?q=" + info["name"]+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM");
 document.getElementById(1).src="https://www.google.com/maps/embed/v1/search?q="+encodeURI(info["name"])+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM";
 document.getElementById(2).src=info["recipe_url"];
 

@@ -39,35 +39,36 @@
 </div><hr class = hr>
 
 <script>
-  var a = window.location.href.split("=")
-  var server = "http://35.203.43.136"
-  var baseUrl = "http://127.0.0.1"
-  baseUrl = server
-  var url = baseUrl + ":6969/api/search/" + window.location.href.split("=")[a.length - 1];
+var server = "http://35.203.43.136"
+var local = "http://0.0.0.0"
+var baseUrl = local
 
+var a = window.location.href.split("=")
+var url = baseUrl + ":6969/api/search/" + window.location.href.split("=")[a.length - 1];
+
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.open("GET", url, false);
+xmlHttp.send(null);
+var ids = JSON.parse(xmlHttp.responseText);
+var foods = [];
+for (var i = 0; i < ids.length; i++){
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET", url, false);
+  xmlHttp.open("GET",  baseUrl + ":6969/api/food/" + ids[i], false);
   xmlHttp.send(null);
-  var ids = JSON.parse(xmlHttp.responseText);
-  var foods = [];
-  for (var i = 0; i < ids.length; i++){
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET",  baseUrl + ":6969/api/food/" + ids[i], false);
-    xmlHttp.send(null);
-    foods.push(JSON.parse(xmlHttp.responseText))
-  }
+  foods.push(JSON.parse(xmlHttp.responseText))
+}
 
-  for (var i = 0; i < ids.length; i++){
-    document.getElementById(i+5).src=foods[i]["image_url"];
-  }
+for (var i = 0; i < ids.length; i++){
+  document.getElementById(i+5).src=foods[i]["image_url"];
+}
 
-  for (var i = 0; i < ids.length; i++){
-    document.getElementById(i).innerHTML=foods[i]["name"];
-  }
+for (var i = 0; i < ids.length; i++){
+  document.getElementById(i).innerHTML=foods[i]["name"];
+}
 
-  function redirect(n){
-    window.location.href = "information.html?id=" + ids[n];
-  }
+function redirect(n){
+  window.location.href = "information.html?id=" + ids[n];
+}
 </script>
 
 </body>
