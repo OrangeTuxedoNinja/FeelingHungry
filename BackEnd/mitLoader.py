@@ -18,7 +18,7 @@ class MitLoader:
             instructions += "<p> INSTRUCTIONS: </p>"
             for instruct in recipe["instructions"]:
                 instructions += "<p>" + instruct["text"] + "<\p>"
-            food.append(Food(recipe["title"], "www.google.com", recipe["url"], instructions, recipe["fsa_lights_per100g"]["fat"],
+            food.append(Food(recipe["title"], None, recipe["url"], instructions, recipe["fsa_lights_per100g"]["fat"],
                              recipe["fsa_lights_per100g"]["salt"], recipe["fsa_lights_per100g"]["saturates"], recipe["fsa_lights_per100g"]["sugars"]))
 
         return food
