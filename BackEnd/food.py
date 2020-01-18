@@ -1,5 +1,5 @@
 import json
-
+import jsonpickle
 
 class Food:
     _id_counter = 0
@@ -13,4 +13,6 @@ class Food:
         self.recipe_html = recipe_html
 
     def toJson(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys= True, indent= 4)
+        print(type(self.recipe_html))
+        print(self.recipe_html)
+        return jsonpickle.encode(self)

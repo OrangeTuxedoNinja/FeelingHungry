@@ -1,6 +1,7 @@
 from typing import List
 from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
+import json
 
 from food import Food
 
@@ -43,7 +44,7 @@ class FoodProducer:
             except Exception:
                 pass
             self.add_food(food_name)
-
+        self.save()
         return ids
 
     def add_food(self, food_name: str) -> None:
@@ -57,3 +58,11 @@ class FoodProducer:
             if food.name == food_name:
                 return True
         return False
+
+    def save(self):
+        with open('foods.json', 'w') as fp:
+            str_food = []
+            for food in self.foods:
+                str_food.append(food.toJson())
+            json.dump(str_food, fp)
+
