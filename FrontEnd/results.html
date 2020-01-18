@@ -18,25 +18,40 @@
 
 <hr class = hr>
 <div class = div onclick="redirect(0)">
-<img src="pic_trulli.jpg" id="5" class = "image" border="100">
+<img id="5" class = "image">
 <p class = foodname id="0"></p>
+<img id="10.1" class = "leaf">
+<img id="10.2" class = "leaf">
+<img id="10.3" class = "leaf">
 </div>
 <hr class = hr>
 <div class = div onclick="redirect(1)">
-<img src="pic_trulli.jpg" id="6" class = "image">
+<img id="6" class = "image">
 <p class = foodname id="1"></p>
+<img id="11.1" class = "leaf">
+<img id="11.2" class = "leaf">
+<img id="11.3" class = "leaf">
 </div><hr class = hr>
 <div class = div onclick="redirect(2)">
-<img src="pic_trulli.jpg" id="7" class = "image">
+<img id="7" class = "image">
 <p class = foodname id="2"></p>
+<img id="12.1" class = "leaf">
+<img id="12.2" class = "leaf">
+<img id="12.3" class = "leaf">
 </div><hr class = hr>
 <div class = div onclick="redirect(3)">
-<img src="pic_trulli.jpg" id="8" class = "image">
+<img id="8" class = "image">
 <p class = foodname id="3"></p>
+<img id="13.1" class = "leaf">
+<img id="13.2" class = "leaf">
+<img id="13.3" class = "leaf">
 </div><hr class = hr>
 <div class = div onclick="redirect(4)">
-<img src="pic_trulli.jpg" id="9" class = "image">
+<img id="9" class = "image">
 <p class = foodname id="4"></p>
+<img id="14.1" class = "leaf">
+<img id="14.2" class = "leaf">
+<img id="14.3" class = "leaf">
 </div><hr class = hr>
 
 <script>
@@ -70,6 +85,17 @@ for (var i = 0; i < ids.length; i++){
 function redirect(n){
   window.location.href = "information.html?id=" + ids[n];
 }
+
+for (var i = 0; i < ids.length; i++){
+  for (var j = 1; j <= 3; j++){
+    if (foods[i]["num_leaves"] >= j){
+      document.getElementById(i + 10 + j * 0.1).src="leaf.png";
+    } else {
+      document.getElementById(i + 10 + j * 0.1).src="transpartent.png";
+    }
+  }
+}
+
 </script>
 
 </body>
