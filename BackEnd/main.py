@@ -5,7 +5,7 @@ from foodProducer import FoodProducer
 app = Flask(__name__, template_folder="../FrontEnd")
 foodset = FoodProducer()
 
-path = "http://35.203.43.136/"
+path = "35.203.43.136"
 
 
 @app.route('/main')
