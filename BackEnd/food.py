@@ -3,7 +3,7 @@ import requests
 import json
 from typing import Optional
 import urllib.parse
-
+import re
 
 class Food:
     _id_counter = 0
@@ -12,7 +12,7 @@ class Food:
                  saturates_level: str, sugars_level: str):
         self.id = Food._id_counter
         Food._id_counter += 1
-        self.name = name
+        self.name = str.join(" ", [word for word in name.split(" ") if not re.search(r'[\d,#]', word.strip())])
         self.image_url = image_url
         self.recipe_url = recipe_url
         self.recipe_html = recipe_html
