@@ -2,8 +2,8 @@ from typing import List, Optional
 from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
 import json
-from gensim.models import word2vec
-import gensim.downloader as api
+import gensim
+import gzip
 
 
 from food import Food
@@ -52,6 +52,8 @@ class FoodProducer:
         self.save()
         return ids
 
+
+
     def add_food(self, food_name: str) -> None:
         for new_food in Crawler.get_food(food_name):
             if new_food.name not in [x.name for x in self.foods]:
@@ -78,3 +80,18 @@ class FoodProducer:
                 r = json.loads(i)
                 self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"]))
         print("Loaded: " + str(len(self.foods)))
+
+
+if __name__ == '__main__':
+    processed_food = []
+    thing = FoodProducer()
+    for food in thing.foods:
+        processed_food.append(food.name.lower())
+        # build vocabulary and train model
+        model = gensim.models.Word2Vec(
+            documents,
+            size=150,
+            window=10,
+            min_count=2,
+            workers=10,
+            iter=10)
