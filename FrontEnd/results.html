@@ -40,7 +40,7 @@
 
 <script>
   var a = window.location.href.split("=")
-  var url = "http://0.0.0.0:6969/api/search/" + window.location.href.split("=")[a.length - 1];
+  var url = "http://colindv.us.to:6969/api/search/" + window.location.href.split("=")[a.length - 1];
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", url, false);
@@ -49,7 +49,7 @@
   var foods = [];
   for (var i = 0; i < ids.length; i++){
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://0.0.0.0:6969/api/food/" + ids[i], false);
+    xmlHttp.open("GET", "http://colindv.us.to:6969/api/food/" + ids[i], false);
     xmlHttp.send(null);
     foods.push(JSON.parse(xmlHttp.responseText))
   }

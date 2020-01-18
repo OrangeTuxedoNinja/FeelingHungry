@@ -2,12 +2,9 @@ from typing import List, Optional
 from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
 import json
-import gensim
-import gzip
 from mitLoader import MitLoader
 
-from gensim.models import word2vec
-import gensim.downloader as api
+
 import os.path
 from food import Food
 
@@ -93,28 +90,4 @@ class FoodProducer:
         print("Loaded: " + str(len(self.foods)))
 
 
-def generate_model():
-    """save model to file, hopefully"""
-    import gensim.downloader as api
 
-    loaded = api.load('word2vec-google-news-300')
-    for i, word in enumerate(loaded.vocab):
-        if i == 10:
-            break
-        print(word)
-
-    import tempfile
-
-    with tempfile.NamedTemporaryFile(prefix='gensim-model-',
-                                     delete=False) as tmp:
-        temporary_filepath = tmp.name
-        loaded.save(temporary_filepath)
-        #
-        # The model is now safely stored in the filepath.
-        # You can copy it to other machines, share it with others, etc.
-        #
-        # To load a saved model:
-        print(temporary_filepath)
-
-def load_model(temporary_filepath):
-    new_model = gensim.models.Word2Vec.load(temporary_filepath)
