@@ -8,7 +8,7 @@ from mitLoader import MitLoader
 import os.path
 from food import Food
 
-banned = ["dough", "spice"]
+banned = ["dough", "spice", "sauce", "seasoning"]
 
 
 class FoodProducer:
@@ -33,11 +33,11 @@ class FoodProducer:
         chosen = []
         c = 0
         score = 50
-        while len(ids) <= 4:
+        while len(ids) <= 9:
             c += 1
             if c > 20:
                 print("Could not find results")
-                return [x.id for x in self.foods[:5]]
+                return [x.id for x in self.foods[:10]]
             try:
                 acc = {}
 
@@ -50,19 +50,23 @@ class FoodProducer:
                 names = [name[0] for name in names]
 
                 for food in self.foods:
-                    if food.name in names and food.id not in ids and food.name not in chosen and food.num_leaves >= 1:
+                    if food.name in names and food.name not in chosen and food.num_leaves >= 1:
                         if acc[food.name] > score:
-                            ids.append(food.id)
+                            ids.append((food.id, food.num_leaves))
                             chosen.append(food.name)
                             print(food.image_url)
                             print(type(food.image_url))
                             if food.image_url is None:
                                 print("Loading image")
                                 food.findImage(food_name)
-                            if len(ids) == 5:
+                            if len(ids) == 10:
                                 break
             except Exception:
                 pass
+            print(ids)
+            ids.sort(key=lambda x: x[1])
+            print(ids)
+            ids = [_id[0] for _id in ids][:5]
             if len(ids) != 5:
                 self.add_food(food_name)
                 score -= 5

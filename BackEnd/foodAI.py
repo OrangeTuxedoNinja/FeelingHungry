@@ -1,7 +1,8 @@
 """uses word2vec to give a list of similar foods."""
 
 import spacy
-
+from typing import List
+import faiss
 
 class FoodAi:
     """
@@ -13,7 +14,7 @@ ai.dotheworkforme()
         """Load spacy model from dataset"""
         self.model = spacy.load("en_core_web_md")
 
-    def get_similar_foods(self, word: str, topn: int):
+    def get_similar_foods(self, word: str, topn: int) -> List[str]:
         """
         returns a list (no duplicates) of similar foods
         """
