@@ -7,10 +7,9 @@ import requests
 
 class Crawler:
     def __init__(self):
-        pass
+        self.searched = []
 
-    @staticmethod
-    def get_food(search_name: str) -> List[Food]:
+    def get_food(self, search_name: str) -> List[Food]:
         print("Running the crawler")
         modifiers = ["", "", "vegetarian", "vegan", "healthy", "high-fiber", "low-no-sugar", "low-fat",
                      "low-cholesterol", "low-sodium", "raw", "organic"]
@@ -27,6 +26,9 @@ class Crawler:
             article = articles[min(i + randint(0, 5), len(articles) - 1)]
             html_name = article.select(".hed")[0]
             f_name = html_name.text.strip()
+            if f_name in self.searched:
+                continue
+            self.searched.append(f_name)
             print("Scanning article: " + f_name)
             url = "https://www.epicurious.com" + html_name.find_all("a")[0]["href"]
             recipe = requests.get(url)
@@ -34,12 +36,11 @@ class Crawler:
             img = None
             images = recipe_bs.find_all("img")
             for pimg in images:
-                if "alt" in pimg.attrs and f_name[:10] in pimg["alt"]:
+                if "alt" in pimg.attrs and (f_name[:10] in pimg["alt"] or "Photo by" in pimg["alt"]):
                     img = pimg
                     break
             if img is not None:
                 if "srcset" not in img.attrs:
-                    print(img)
                     iurl = img["data-srcset"]
                 else:
                     iurl = img["srcset"]
