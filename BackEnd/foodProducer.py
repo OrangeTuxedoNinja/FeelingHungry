@@ -4,6 +4,7 @@ from epicurcrawler import Crawler
 import json
 import gensim
 import gzip
+from mitLoader import MitLoader
 
 from gensim.models import word2vec
 import gensim.downloader as api
@@ -14,7 +15,10 @@ from food import Food
 class FoodProducer:
     def __init__(self):
         self.foods = []
-        self.load()
+        loader = MitLoader()
+        self.foods = loader.load()
+        print("Loaded: " + str(len(self.foods)) + " foods")
+        # self.load()
         # self.word_model = api.load('glove-wiki-gigaword-50')
 
     def get_food(self, food_id: str) -> Optional[Food]:
@@ -46,12 +50,15 @@ class FoodProducer:
                 print(names)
                 for food in self.foods:
                     if food.name in names and food.id not in ids:
-                        if acc[food.name] > 50:
+                        if acc[food.name] > 85:
                             ids.append(food.id)
+                            if len(ids) == 5:
+                                break
             except Exception:
                 pass
-            self.add_food(food_name)
-        self.save()
+            if len(ids) != 5:
+                self.add_food(food_name)
+        # self.save()
         return ids
 
     def add_food(self, food_name: str) -> None:
