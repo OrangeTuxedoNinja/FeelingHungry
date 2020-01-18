@@ -22,21 +22,27 @@ class FoodProducer:
     def search_food(self, food_name: str) -> List[int]:
         ids = []
         c = 0
-        while len(ids) == 0:
+        while len(ids) <= 4:
             c += 1
             if c > 20:
                 print("Could not find results")
                 return [x.id for x in self.foods[:5]]
             try:
-                print(self.foods)
+                print([n.name for n in self.foods])
+                acc = {}
                 names = process.extract(food_name, [x.name for x in self.foods], limit=5)
+                print(names)
+                for name in names:
+                    acc[name[0]] = name[1]
                 names = [name[0] for name in names]
                 print(names)
                 for food in self.foods:
-                    if food.name in names:
-                        ids.append(food.id)
+                    if food.name in names and food.id not in ids:
+                        if acc[food.name] > 50:
+                            ids.append(food.id)
             except Exception:
-                self.add_food(food_name)
+                pass
+            self.add_food(food_name)
 
         return ids
 
@@ -46,3 +52,8 @@ class FoodProducer:
                 print("Added food: " + new_food.name)
                 self.foods.append(new_food)
 
+    def food_exists(self, food_name: str) -> bool:
+        for food in self.foods:
+            if food.name == food_name:
+                return True
+        return False
