@@ -17,7 +17,7 @@ def render_static(page_name):
 
 @app.route("/")
 def main_page():
-    return redirect("http://127.0.0.1:5000/index")
+    return redirect("http://35.203.43.136:6969/index")
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
