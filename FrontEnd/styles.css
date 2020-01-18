@@ -104,14 +104,12 @@ input[type=text] {
   padding: 0 0 0 0;
   height: 100VH;
   width: 30VW;
-  display: inline;
 }
 
 .iframe2 {
   padding: 0 0 0 0;
-  width: 100%;
+  width: 70VW;
   height: : 100VH;
-  display: inline;
 }
 
 #id1 {
@@ -126,4 +124,8 @@ input[type=text] {
   border: 0;
   float: right;
   transform: translate(0, 75%);
+}
+
+.div2 {
+  display: inline;
 }
