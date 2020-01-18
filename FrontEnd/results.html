@@ -53,9 +53,7 @@
     xmlHttp.send(null);
     foods.push(JSON.parse(xmlHttp.responseText))
   }
-
-  console.log(foods)
-
+  
   for (var i = 0; i < ids.length; i++){
     document.getElementById(i+5).src=foods[i]["image_url"];
   }

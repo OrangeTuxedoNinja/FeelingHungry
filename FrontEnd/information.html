@@ -10,7 +10,24 @@
 
 <body>
 
+<button class="btn btn-outline-dark button 	glyphicon glyphicon-menu-left botton" onclick="history.back()" id="botton" ></button>
+<script><input type="submit" value="Back" onclick="window.history.back() disabled"/></script>
 
+<p class = header id="0"></p>
+
+<script>
+var a = window.location.href.split("=")
+var url = "http://0.0.0.0:6969/search/food/" + window.location.href.split("=")[a.length - 1];
+console.log(url)
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.open("GET", url, false);
+xmlHttp.send(null);
+console.log(xmlHttp.responseText)
+var info = JSON.parse(xmlHttp.responseText);
+
+document.getElementById(0).innerHTML=info["name"];
+
+</script>
 
 </body>
 </html>
