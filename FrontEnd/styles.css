@@ -79,7 +79,13 @@ input[type=text] {
 
 .iframe {
   padding: 0 0 0 0VW;
-  height: 40VH;
+  height: 30VH;
+  width: 100VW;
+}
+
+.iframe2 {
+  padding: 0 0 0 0VW;
+  height: 100%;
   width: 100VW;
 }
 

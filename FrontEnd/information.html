@@ -22,6 +22,11 @@
 id = "1" src="https://www.google.com/maps/embed/v1/search?q="></iframe>
 </div>
 
+<div class=iframe2>
+<iframe width="100%" height="100%" frameborder="0" style="border:0"
+id = "2"></iframe>
+</div>
+
 
 <script>
 var a = window.location.href.split("=")
@@ -37,6 +42,7 @@ console.log(info)
 
 document.getElementById(0).innerHTML=info["name"];
 document.getElementById(1).src+=info["name"]+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM";
+document.getElementById(2).src=info["recipe_url"];
 
 </script>
 
