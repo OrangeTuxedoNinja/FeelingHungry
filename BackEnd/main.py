@@ -20,7 +20,7 @@ def render_static(page_name):
 
 @app.route("/")
 def main_page():
-    return redirect("http://35.203.43.136/index")
+    return render_template('%s.html')
 
 
 @app.route("/api/search/<string:food>")
