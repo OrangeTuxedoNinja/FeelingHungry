@@ -8,6 +8,8 @@ class FoodProducer:
     def __init__(self):
         self.foods = []
         self.load()
+        for name in ["apple", "burger", "veggie burger"]:
+            self.add_food(name)
 
     def load(self):
         pass

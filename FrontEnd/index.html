@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Feeling Hungry?</title>
+<style>
+html, body {
+  height: 100%;
+  background-color: red;
+  background-image: linear-gradient(DarkMagenta , Indigo);
+  overflow: hidden;
+}
+
+.centered {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+input[type=text] {
+  font-family: "Arial", Helvetica, Sans-serif;
+  color: DarkGoldenRod;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0px  #ccc;
+  border-radius: 4px;
+  font-size: 4VW;
+  border-bottom: 4px solid DarkGoldenRod;
+  background-color: transparent;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 12px 12px 12px;
+}
+
+::placeholder {
+  color: DarkGoldenRod;
+}
+
 </style>
 </head>
 
-<body bgcolor="#3F064F">
-<canvas class='myCanvas' onclick='updateMouse(event)'>
-</canvas>
+<body>
 
+<div class="centered">
+<form>
+  <input type="text" name="search" placeholder="What are you craving?">
+</form>
+</div>
 
-
-<style>
-  body {
-    margin: 0;
-    overflow:
-    hidden;
-  }
-</style>
-
-<script>
-
-//Javascrpt here
-
-</script>
 </body>
 </html>
