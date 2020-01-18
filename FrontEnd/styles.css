@@ -32,3 +32,8 @@ input[type=text] {
   color: DarkGoldenRod;
   opacity: 0.5;
 }
+
+.botton {
+  color: DarkGoldenRod;
+  background-color: transparent;
+}
