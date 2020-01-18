@@ -20,7 +20,7 @@ def render_static(page_name):
 
 @app.route("/")
 def main_page():
-    return render_template('%s.html')
+    return render_template('index.html')
 
 
 @app.route("/api/search/<string:food>")
