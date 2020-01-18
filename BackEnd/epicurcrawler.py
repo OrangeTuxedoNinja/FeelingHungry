@@ -44,7 +44,7 @@ class Crawler:
             else:
                 print("No image found!")
                 print(url)
-                print(recipe_bs.find_all("img"))
+                # print(recipe_bs.find_all("img"))
                 iurl = "https://elitescreens.com/images/product_album/no_image.png"
             html_recipe = recipe_bs.select(".recipe-content")[0].text
             food = Food(f_name, iurl, url, html_recipe)

@@ -13,6 +13,4 @@ class Food:
         self.recipe_html = recipe_html
 
     def toJson(self):
-        print(type(self.recipe_html))
-        print(self.recipe_html)
         return jsonpickle.encode(self)
