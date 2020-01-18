@@ -1,9 +1,11 @@
 from flask import Flask, render_template, redirect, jsonify
 from food import Food
 from foodProducer import FoodProducer
+from flask_cors import CORS
 
 app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_folder="../FrontEnd")
 foodset = FoodProducer()
+CORS(app)
 
 # path = "35.203.43.136"
 # local = "127.0.0.1"
