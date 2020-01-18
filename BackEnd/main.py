@@ -5,7 +5,7 @@ from foodProducer import FoodProducer
 app = Flask(__name__, template_folder="../FrontEnd")
 foodset = FoodProducer()
 
-path = "35.203.43.136"
+# path = "35.203.43.136"
 
 
 @app.route('/main')
@@ -42,4 +42,4 @@ def add_food(name: str):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host='0.0.0.0', debug=True, port=6969)
