@@ -21,7 +21,12 @@ class Food:
         self.salt_level = salt_level
         self.saturates_level = saturates_level
         self.sugars_level = sugars_level
-        self.num_leaves = (self.how_healthy() + 1) // 3
+        if self.how_healthy() < 6:
+            self.num_leaves = 1
+        elif self.how_healthy() < 9:
+            self.num_leaves = 2
+        else:
+            self.num_leaves = 3
 
     def toJson(self):
         return jsonpickle.encode(self)
@@ -49,11 +54,11 @@ class Food:
         def get_level(level: str) -> int:
             """Maps the string descriptions of healthiness to numerical"""
             if level == "green":
-                return 0
+                return 3
             elif level == "orange":
-                return 1
-            elif level == "red":
                 return 2
+            elif level == "red":
+                return 0
             else:
                 raise Exception
         return get_level(self.fat_level) + get_level(self.sugars_level) + get_level(self.salt_level) + get_level(self.saturates_level)
