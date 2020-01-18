@@ -24,7 +24,7 @@ input[type=text] {
   background-color: transparent;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  padding: 1VW 1VW 1VW 1VW;
+  padding: 1VW 0VW 1VW 0VW;
 }
 
 ::placeholder {
