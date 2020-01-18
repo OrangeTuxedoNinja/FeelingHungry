@@ -2,6 +2,7 @@
 <html>
 <head>
 
+<title>Hungry?</title>
 <link rel="icon" type="image/x-icon" href="favicon.ico"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="styles.css">
@@ -41,7 +42,7 @@
 <script>
 var server = "http://35.203.43.136"
 var local = "http://0.0.0.0"
-var baseUrl = local
+var baseUrl = server
 
 var a = window.location.href.split("=")
 var url = baseUrl + ":6969/api/search/" + window.location.href.split("=")[a.length - 1];
