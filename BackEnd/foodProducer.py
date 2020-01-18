@@ -1,6 +1,7 @@
 from typing import List
 from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
+import word2vec
 
 from food import Food
 
@@ -30,7 +31,11 @@ class FoodProducer:
             try:
                 print([n.name for n in self.foods])
                 acc = {}
+
+                # Do the ai thing
                 names = process.extract(food_name, [x.name for x in self.foods], limit=5)
+
+
                 print(names)
                 for name in names:
                     acc[name[0]] = name[1]
