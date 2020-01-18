@@ -10,16 +10,14 @@
 
 <body>
 
-<button class="btn btn-outline-dark button glyphicon btn-lg glyphicon-menu-left" id="botton" onclick="history.back()" ></button>
+<button class="btn btn-outline-dark button 	glyphicon glyphicon-menu-left botton" onclick="history.back()" ></button>
 
 <script><input type="submit" value="Back" onclick="window.history.back() disabled"/></script>
 
 <script>
 function main(){
-  console.log(window.location.href);
   var a = window.location.href.split("=")
   var url = "http://0.0.0.0:6969/api/search/" + window.location.href.split("=")[a.length - 1];
-  console.log(url);
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", url, false);
