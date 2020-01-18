@@ -1,49 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-<style>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
 
-
-
-html, body {
-  height: 100%;
-  background-color: red;
-  background-image: linear-gradient(DarkMagenta , Indigo);
-  overflow: hidden;
-}
-
-.centered {
-  position: fixed;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-input[type=text] {
-  font-family: "Arial", Helvetica, Sans-serif;
-  color: DarkGoldenRod;
-  width: 100%;
-  box-sizing: border-box;
-  border: 0px  #ccc;
-  border-radius: 4px;
-  font-size: 4VW;
-  border-bottom: 4px solid DarkGoldenRod;
-  background-color: transparent;
-  background-position: 10px 10px;
-  background-repeat: no-repeat;
-  padding: 12px 12px 12px 12px;
-}
-
-::placeholder {
-  color: DarkGoldenRod;
-}
-
-</style>
 </head>
 
 <body>
+
+<p id="name">
 
 <div class="centered">
 <iframe width="1000" height="900" frameborder="0" style="border:0"
