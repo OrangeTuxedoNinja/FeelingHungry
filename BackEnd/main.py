@@ -6,6 +6,7 @@ app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_
 foodset = FoodProducer()
 
 # path = "35.203.43.136"
+# local = "127.0.0.1"
 
 
 @app.route('/main')
@@ -35,11 +36,6 @@ def get_food(id: str):
     if food is None:
         return {}
     return food.toJson()
-
-
-@app.route("/api/addfood/<string:name>")
-def add_food(name: str):
-    return foodset.add_food(name).toJson()
 
 
 if __name__ == '__main__':
