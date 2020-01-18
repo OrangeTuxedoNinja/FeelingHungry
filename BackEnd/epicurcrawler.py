@@ -33,7 +33,7 @@ class Crawler:
             recipe_bs = BeautifulSoup(recipe.text, "html.parser")
             img = None
             for pimg in recipe_bs.find_all("img"):
-                if "alt" in pimg.attrs and f_name[:15] in pimg["alt"]:
+                if "alt" in pimg.attrs and (name[:10] in pimg["alt"] or "RECIPE" in pimg["alt"]):
                     img = pimg
             if img is not None:
                 if "srcset" not in img.attrs:
@@ -44,7 +44,7 @@ class Crawler:
             else:
                 print("No image found!")
                 print(url)
-                # print(recipe_bs.find_all("img"))
+                print(recipe_bs.find_all("img"))
                 iurl = "https://elitescreens.com/images/product_album/no_image.png"
             html_recipe = recipe_bs.select(".recipe-content")[0].text
             food = Food(f_name, iurl, url, html_recipe)

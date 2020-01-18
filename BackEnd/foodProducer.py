@@ -1,7 +1,9 @@
-from typing import List
+from typing import List, Optional
 from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
 import json
+from gensim.models import word2vec
+import gensim.downloader as api
 
 
 from food import Food
@@ -11,11 +13,9 @@ class FoodProducer:
     def __init__(self):
         self.foods = []
         self.load()
+        # self.word_model = api.load('glove-wiki-gigaword-50')
 
-    def load(self):
-        pass
-
-    def get_food(self, food_id: str) -> Food:
+    def get_food(self, food_id: str) -> Optional[Food]:
         for food in self.foods:
             if food.id == food_id:
                 return food
@@ -71,3 +71,10 @@ class FoodProducer:
                 str_food.append(food.toJson())
             json.dump(str_food, fp)
 
+    def load(self):
+        with open('foods.json', 'r') as fp:
+            x = json.load(fp)
+            for i in x:
+                r = json.loads(i)
+                self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"]))
+        print("Loaded: " + str(len(self.foods)))
