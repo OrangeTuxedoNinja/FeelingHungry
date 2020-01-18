@@ -4,8 +4,7 @@ from epicurcrawler import Crawler
 import json
 from gensim.models import word2vec
 import gensim.downloader as api
-
-
+import os.path
 from food import Food
 
 
@@ -72,6 +71,8 @@ class FoodProducer:
             json.dump(str_food, fp)
 
     def load(self):
+        if not os.path.isfile("foods.json"):
+            return
         with open('foods.json', 'r') as fp:
             x = json.load(fp)
             for i in x:

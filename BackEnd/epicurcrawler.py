@@ -24,7 +24,7 @@ class Crawler:
         articles = bs.select(".recipe-content-card")
         foods = []
         for i in range(min(5, len(articles))):
-            article = articles[i]
+            article = articles[i + randint(0, 5)]
             html_name = article.select(".hed")[0]
             f_name = html_name.text.strip()
             print("Scanning article: " + f_name)
