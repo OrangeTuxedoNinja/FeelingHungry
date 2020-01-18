@@ -8,6 +8,8 @@ from mitLoader import MitLoader
 import os.path
 from food import Food
 
+banned = ["dough", "spice"]
+
 
 class FoodProducer:
     def __init__(self):
@@ -28,6 +30,7 @@ class FoodProducer:
             return self.cached_foods[food_name]
 
         ids = []
+        chosen = []
         c = 0
         score = 50
         while len(ids) <= 4:
@@ -40,16 +43,17 @@ class FoodProducer:
 
                 # Do the ai thing
                 names = process.extract(food_name, [x.name for x in self.foods],
-                                        limit=5)
+                                        limit=20)
 
                 for name in names:
                     acc[name[0]] = name[1]
                 names = [name[0] for name in names]
 
                 for food in self.foods:
-                    if food.name in names and food.id not in ids:
+                    if food.name in names and food.id not in ids and food.name not in chosen and food.num_leaves >= 1:
                         if acc[food.name] > score:
                             ids.append(food.id)
+                            chosen.append(food.name)
                             print(food.image_url)
                             print(type(food.image_url))
                             if food.image_url is None:
@@ -99,7 +103,13 @@ class FoodProducer:
             x = json.load(fp)
             for i in x:
                 r = json.loads(i)
-                self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                allow = True
+                for namew in r["name"].split(" "):
+                    if namew in banned:
+                        allow = False
+                        break
+                if allow:
+                    self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
         print("Loaded: " + str(len(self.foods)))
 
 
