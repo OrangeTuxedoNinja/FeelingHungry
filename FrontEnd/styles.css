@@ -28,7 +28,7 @@ input[type=text] {
 }
 
 ::placeholder {
-  color: black;
+  color: grey;
   opacity: 1;
 }
 
@@ -75,4 +75,14 @@ input[type=text] {
   width: 14VH;
   object-fit: cover;
   display: inline;
+}
+
+.iframe {
+  padding: 0 0 0 0VW;
+  height: 40VH;
+  width: 100VW;
+}
+
+#id1 {
+  border: 1px black solid;
 }
