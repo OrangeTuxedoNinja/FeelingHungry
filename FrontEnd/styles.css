@@ -102,14 +102,16 @@ input[type=text] {
 
 .iframe {
   padding: 0 0 0 0;
-  height: 30VH;
-  width: 100VW;
+  height: 100VH;
+  width: 30VW;
+  display: inline;
 }
 
 .iframe2 {
   padding: 0 0 0 0;
-  height: 100%;
-  width: 100VW;
+  width: 100%;
+  height: : 100VW;
+  display: inline;
 }
 
 #id1 {
