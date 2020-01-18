@@ -24,7 +24,7 @@ class Crawler:
         articles = bs.select(".recipe-content-card")
         foods = []
         for i in range(min(5, len(articles))):
-            article = articles[i + randint(0, 5)]
+            article = articles[min(i + randint(0, 5), len(articles) - 1)]
             html_name = article.select(".hed")[0]
             f_name = html_name.text.strip()
             print("Scanning article: " + f_name)
@@ -32,9 +32,15 @@ class Crawler:
             recipe = requests.get(url)
             recipe_bs = BeautifulSoup(recipe.text, "html.parser")
             img = None
-            for pimg in recipe_bs.find_all("img"):
+            images = recipe_bs.find_all("img")
+            print(images)
+            for pimg in images:
+                print(pimg)
+                print(pimg.attrs)
+                print("alt" in pimg.attrs)
                 if "alt" in pimg.attrs and (name[:10] in pimg["alt"] or "RECIPE" in pimg["alt"]):
                     img = pimg
+                    break
             if img is not None:
                 if "srcset" not in img.attrs:
                     print(img)
@@ -46,7 +52,6 @@ class Crawler:
                 print(url)
                 print(recipe_bs.find_all("img"))
                 iurl = "https://elitescreens.com/images/product_album/no_image.png"
-                continue
             html_recipe = recipe_bs.select(".recipe-content")[0].text
             food = Food(f_name, iurl, url, html_recipe)
             foods.append(food)
