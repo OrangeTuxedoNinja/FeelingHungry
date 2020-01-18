@@ -36,8 +36,8 @@ class FoodProducer:
                 acc = {}
 
                 # Do the ai thing
-                names = process.extract(food_name, [x.name for x in self.foods], limit=5)
-
+                names = process.extract(food_name, [x.name for x in self.foods],
+                                        limit=5)
 
                 print(names)
                 for name in names:
@@ -53,8 +53,6 @@ class FoodProducer:
             self.add_food(food_name)
         self.save()
         return ids
-
-
 
     def add_food(self, food_name: str) -> None:
         for new_food in Crawler.get_food(food_name):
@@ -82,20 +80,34 @@ class FoodProducer:
             x = json.load(fp)
             for i in x:
                 r = json.loads(i)
-                self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"]))
+                self.foods.append(
+                    Food(r["name"], r["image_url"], r["recipe_url"],
+                         r["recipe_html"]))
         print("Loaded: " + str(len(self.foods)))
 
 
-if __name__ == '__main__':
-    processed_food = []
-    thing = FoodProducer()
-    for food in thing.foods:
-        processed_food.append(food.name.lower())
-        # build vocabulary and train model
-        model = gensim.models.Word2Vec(
-            documents,
-            size=150,
-            window=10,
-            min_count=2,
-            workers=10,
-            iter=10)
+def generate_model():
+    """save model to file, hopefully"""
+    import gensim.downloader as api
+
+    loaded = api.load('word2vec-google-news-300')
+    for i, word in enumerate(loaded.vocab):
+        if i == 10:
+            break
+        print(word)
+
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(prefix='gensim-model-',
+                                     delete=False) as tmp:
+        temporary_filepath = tmp.name
+        loaded.save(temporary_filepath)
+        #
+        # The model is now safely stored in the filepath.
+        # You can copy it to other machines, share it with others, etc.
+        #
+        # To load a saved model:
+        print(temporary_filepath)
+
+def load_model(temporary_filepath):
+    new_model = gensim.models.Word2Vec.load(temporary_filepath)
