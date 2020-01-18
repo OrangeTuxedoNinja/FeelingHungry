@@ -2,10 +2,11 @@ from flask import Flask, render_template, redirect, jsonify
 from food import Food
 from foodProducer import FoodProducer
 
-app = Flask(__name__, template_folder="../FrontEnd")
+app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_folder="../FrontEnd")
 foodset = FoodProducer()
 
 # path = "35.203.43.136"
+# local = "127.0.0.1"
 
 
 @app.route('/main')
@@ -13,9 +14,10 @@ def hello_world():
     return 'test!'
 
 
-@app.route('/<string:page_name>/')
-def render_static(page_name):
-    return render_template('%s.html' % page_name)
+# @app.route('/<string:page_name>/')
+# def render_static(page_name):
+#     print("Getting: " + page_name)
+#     return render_template('%s' % page_name)
 
 
 @app.route("/")
@@ -34,11 +36,6 @@ def get_food(id: str):
     if food is None:
         return {}
     return food.toJson()
-
-
-@app.route("/api/addfood/<string:name>")
-def add_food(name: str):
-    return foodset.add_food(name).toJson()
 
 
 if __name__ == '__main__':
