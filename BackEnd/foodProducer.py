@@ -105,7 +105,7 @@ class FoodProducer:
                 r = json.loads(i)
                 allow = True
                 for namew in r["name"].split(" "):
-                    if namew in banned:
+                    if namew.strip().lower() in banned:
                         allow = False
                         break
                 if allow:
