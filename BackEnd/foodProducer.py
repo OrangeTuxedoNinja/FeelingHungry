@@ -1,4 +1,4 @@
-from BackEnd.food import Food
+from food import Food
 
 
 class FoodProducer:
@@ -15,10 +15,14 @@ class FoodProducer:
                 return food
 
         # now we just create a new food for now. in reality we would have to scrape at this point
-        return self.add_food("apple")
+        return None
 
-    def search_food(self, food: str) -> Food:
-        pass
+    def search_food(self, food_name: str) -> Food:
+        for food in self.foods:
+            if food.name == food_name:
+                return food
+
+        return self.add_food(food_name)
 
     def add_food(self, food_name: str) -> Food:
         f = Food(food_name)

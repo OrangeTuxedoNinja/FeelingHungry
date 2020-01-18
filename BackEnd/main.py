@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, jsonify
-from BackEnd.food import Food
-from BackEnd.foodProducer import FoodProducer
+from food import Food
+from foodProducer import FoodProducer
 
 app = Flask(__name__, template_folder="../FrontEnd")
 foodset = FoodProducer()
@@ -25,6 +25,7 @@ def search_food(food):
 
 @app.route("/api/food/<string:id>")
 def get_food(food_id: str):
+
     return foodset.get_food(int(food_id)).toJson()
 
 
