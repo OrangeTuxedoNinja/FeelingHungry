@@ -5,7 +5,7 @@ from BackEnd.foodProducer import FoodProducer
 app = Flask(__name__, template_folder="../FrontEnd")
 foodset = FoodProducer()
 
-path = "http://35.203.43.136:5000/"
+path = "http://127.0.0.1:5000/"
 
 @app.route('/main')
 def hello_world():
@@ -21,7 +21,11 @@ def main_page():
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
-    return foodset.get_food(food).toJson()
+    return foodset.search_food(food).toJson()
+
+@app.route("/api/food/<string:id>")
+def get_food(food_id: str):
+    return foodset.get_food(int(food_id)).toJson()
 
 
 if __name__ == '__main__':

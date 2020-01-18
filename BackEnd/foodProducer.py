@@ -9,13 +9,16 @@ class FoodProducer:
     def load(self):
         pass
 
-    def get_food(self, food_name: str) -> Food:
+    def get_food(self, food_id: str) -> Food:
         for food in self.foods:
-            if food.name == food_name:
+            if food.id == food_id:
                 return food
 
         # now we just create a new food for now. in reality we would have to scrape at this point
-        return self.add_food(food_name)
+        return self.add_food("apple")
+
+    def search_food(self, food: str) -> Food:
+        pass
 
     def add_food(self, food_name: str) -> Food:
         f = Food(food_name)
