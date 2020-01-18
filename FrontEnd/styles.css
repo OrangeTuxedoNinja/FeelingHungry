@@ -1,7 +1,6 @@
 html, body {
   height: 100%;
-  background-color: red;
-  background-image: linear-gradient(DarkMagenta , Indigo);
+  background-color: white;
   overflow: hidden;
 }
 
@@ -15,13 +14,13 @@ html, body {
 input[type=text] {
   outline-width: 0;
   font-family: "Arial", Helvetica, Sans-serif;
-  color: DarkGoldenRod;
+  color: black;
   width: 100%;
   box-sizing: border-box;
   border: 0px;
   border-radius: 0px;
   font-size: 4VW;
-  border-bottom: 4px solid DarkGoldenRod;
+  border-bottom: 4px solid black;
   background-color: transparent;
   background-position: 0px 0px;
   background-repeat: no-repeat;
@@ -29,13 +28,51 @@ input[type=text] {
 }
 
 ::placeholder {
-  color: DarkGoldenRod;
-  opacity: 0.5;
+  color: black;
+  opacity: 1;
 }
 
 #botton {
-  color: DarkGoldenRod;
+  padding: 10px;
+  color: black;
   background-color: transparent;
-  font-size: 30px;
+  font-size: 6VH;
+  position: absolute;
 }
 
+.header{
+  color: black;
+  font-family: "Arial", Helvetica, Sans-serif;
+  font-size: 6VH;
+  text-align: center;
+  padding: 12px 7VH 12px 7VH;
+}
+
+.foodname{
+  color: black;
+  font-family: "Arial", Helvetica, Sans-serif;
+  font-size: 3VH;
+  padding: 4VH 4VH 4VH 4VH;
+  margin: 0;
+  display: inline;
+}
+
+.div {}
+
+.div:hover{
+  background: LightGrey;
+}
+
+.hr {
+  border: 0.5px solid grey;
+  padding: 0px 0px 0px 0px;
+  margin: 0;
+  padding: 0;
+}
+
+.image {
+  height: 14VH;
+  width: 14VH;
+  object-fit: cover;
+  display: inline;
+}

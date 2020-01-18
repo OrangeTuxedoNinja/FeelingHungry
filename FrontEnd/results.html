@@ -11,24 +11,58 @@
 <body>
 
 <button class="btn btn-outline-dark button 	glyphicon glyphicon-menu-left botton" onclick="history.back()" id="botton" ></button>
-
 <script><input type="submit" value="Back" onclick="window.history.back() disabled"/></script>
 
+<p class = header>Can We Recommend Some Alternatives?</p>
+
+<hr class = hr>
+<div class = div>
+<img src="pic_trulli.jpg" id="5" class = "image">
+<p class = foodname id="0"></p>
+</div>
+<hr class = hr>
+<div class = div>
+<img src="pic_trulli.jpg" id="6" class = "image">
+<p class = foodname id="1"></p>
+</div><hr class = hr>
+<div class = div>
+<img src="pic_trulli.jpg" id="7" class = "image">
+<p class = foodname id="2"></p>
+</div><hr class = hr>
+<div class = div>
+<img src="pic_trulli.jpg" id="8" class = "image">
+<p class = foodname id="3"></p>
+</div><hr class = hr>
+<div class = div>
+<img src="pic_trulli.jpg" id="9" class = "image">
+<p class = foodname id="4"></p>
+</div><hr class = hr>
+
 <script>
-function main(){
   var a = window.location.href.split("=")
   var url = "http://0.0.0.0:6969/api/search/" + window.location.href.split("=")[a.length - 1];
 
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.open("GET", url, false);
   xmlHttp.send(null);
-  var id = xmlHttp.responseText;
+  var ids = JSON.parse(xmlHttp.responseText);
+  var foods = [];
+  for (var i = 0; i < ids.length; i++){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "http://0.0.0.0:6969/api/food/" + ids[i], false);
+    xmlHttp.send(null);
+    foods.push(JSON.parse(xmlHttp.responseText))
+  }
 
-  console.log(id);
-}
+  console.log(foods)
 
-window.onload=main;
+  for (var i = 0; i < ids.length; i++){
+    document.getElementById(i+5).src=foods[i]["image_url"];
+  }
 
+  for (var i = 0; i < ids.length; i++){
+    document.getElementById(i).innerHTML=foods[i]["name"];
+  }
 </script>
 
 </body>
