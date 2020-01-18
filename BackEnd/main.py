@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect
 app = Flask(__name__, template_folder="../FrontEnd")
 
-path = "http://127.0.0.1:5000/"
+path = "http://35.203.43.136:5000/"
 
 @app.route('/main')
 def hello_world():
