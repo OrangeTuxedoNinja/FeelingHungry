@@ -21,13 +21,18 @@ def main_page():
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
-    return foodset.search_food(food).toJson()
+    return jsonify(foodset.search_food(food))
 
 @app.route("/api/food/<string:id>")
-def get_food(food_id: str):
+def get_food(id: str):
+    food = foodset.get_food(int(id))
+    if food is None:
+        return {}
+    return food.toJson()
 
-    return foodset.get_food(int(food_id)).toJson()
-
+@app.route("/api/addfood/<string:name>")
+def add_food(name: str):
+    return foodset.add_food(name).toJson()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=80)

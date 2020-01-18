@@ -1,3 +1,6 @@
+from typing import List
+from difflib import get_close_matches
+
 from food import Food
 
 
@@ -13,16 +16,15 @@ class FoodProducer:
         for food in self.foods:
             if food.id == food_id:
                 return food
-
-        # now we just create a new food for now. in reality we would have to scrape at this point
         return None
 
-    def search_food(self, food_name: str) -> Food:
+    def search_food(self, food_name: str) -> List[int]:
+        names = get_close_matches(food_name, [x.name for x in self.foods])
+        ids = []
         for food in self.foods:
-            if food.name == food_name:
-                return food
-
-        return self.add_food(food_name)
+            if food.name in names:
+                ids.append(food.id)
+        return ids
 
     def add_food(self, food_name: str) -> Food:
         f = Food(food_name)
