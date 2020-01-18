@@ -2,11 +2,11 @@ import json
 
 
 class Food:
-    id_counter = 0
+    _id_counter = 0
 
     def __init__(self, name: str):
-        self.id = Food.id_counter
-        Food.id_counter += 1
+        self.id = Food._id_counter
+        Food._id_counter += 1
         self.name = name
 
     def toJson(self):
