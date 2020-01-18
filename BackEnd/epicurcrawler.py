@@ -10,15 +10,15 @@ class Crawler:
         pass
 
     @staticmethod
-    def get_food(name: str) -> List[Food]:
+    def get_food(search_name: str) -> List[Food]:
         print("Running the crawler")
         modifiers = ["", "", "vegetarian", "vegan", "healthy", "high-fiber", "low-no-sugar", "low-fat",
                      "low-cholesterol", "low-sodium", "raw", "organic"]
         modifier = modifiers[randint(0, len(modifiers) - 1)]
         if modifier == "":
-            req = requests.get("https://www.epicurious.com/search/" + name + "?content=recipe")
+            req = requests.get("https://www.epicurious.com/search/" + search_name + "?content=recipe")
         else:
-            req = requests.get("https://www.epicurious.com/search/" + name + "?special-consideration=" + modifier + "&content=recipe")
+            req = requests.get("https://www.epicurious.com/search/" + search_name + "?special-consideration=" + modifier + "&content=recipe")
 
         bs = BeautifulSoup(req.text, "html.parser")
         articles = bs.select(".recipe-content-card")
@@ -33,12 +33,8 @@ class Crawler:
             recipe_bs = BeautifulSoup(recipe.text, "html.parser")
             img = None
             images = recipe_bs.find_all("img")
-            print(images)
             for pimg in images:
-                print(pimg)
-                print(pimg.attrs)
-                print("alt" in pimg.attrs)
-                if "alt" in pimg.attrs and (name[:10] in pimg["alt"] or "RECIPE" in pimg["alt"]):
+                if "alt" in pimg.attrs and f_name[:10] in pimg["alt"]:
                     img = pimg
                     break
             if img is not None:
