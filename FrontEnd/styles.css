@@ -1,7 +1,23 @@
 html, body {
   height: 100%;
-  background-color: white;
+  background-color: darkmagenta;
   overflow: hidden;
+
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .centered {
@@ -13,68 +29,73 @@ html, body {
 
 input[type=text] {
   outline-width: 0;
-  font-family: "Arial", Helvetica, Sans-serif;
-  color: black;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  color: white;
   width: 100%;
   box-sizing: border-box;
   border: 0px;
   border-radius: 0px;
   font-size: 4VW;
-  border-bottom: 0.25VW solid black;
+  border-bottom: 0.25VW solid white;
   background-color: transparent;
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  padding: 1VW 0VW 1VW 0VW;
+  padding: 0.5VW 0 0.5VW 0;
+  margin: 0;
 }
 
 ::placeholder {
-  color: grey;
-  opacity: 1;
+  color: white;
+  opacity: 0.5;
 }
 
 #botton {
-  padding: 10px;
-  color: black;
+  padding: 3VH;
+  color: white;
   background-color: transparent;
-  font-size: 6VH;
+  font-size: 6.5VH;
   position: absolute;
 }
 
 .header{
-  color: black;
-  font-family: "Arial", Helvetica, Sans-serif;
-  font-size: 6VH;
+  color: white;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 6.5VH;
   text-align: center;
-  padding: 12px 7VH 12px 7VH;
+  padding: 4VH 11VH 2VH 11VH;
 }
 
 .foodname{
-  color: black;
-  font-family: "Arial", Helvetica, Sans-serif;
-  font-size: 3VH;
+  color: white;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-size: 4.5VH;
   padding: 4VH 4VH 4VH 4VH;
   margin: 0;
   display: inline;
 }
 
-.div {}
+.div {
+  padding: 2VH 5VH
+}
 
 .div:hover{
-  background: LightGrey;
+  background: rgba(204, 0, 157, 0.35);
 }
 
 .hr {
-  border: 0.5px solid grey;
+  border: 0.75px solid white;
   padding: 0px 0px 0px 0px;
   margin: 0;
   padding: 0;
+  opacity: 0.3;
 }
 
 .image {
-  height: 14VH;
-  width: 14VH;
+  height: 10.62VH;
+  width: 10.62VH;
   object-fit: cover;
   display: inline;
+  border-radius: 1.5VH;
 }
 
 .iframe {
