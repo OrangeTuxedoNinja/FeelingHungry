@@ -18,14 +18,14 @@
 <p id="name">
 
 <div class="div2">
-
-<iframe class=iframe width="100%" height="100%" frameborder="0" style="border:0"
+<iframe width="100%" height="100%" frameborder="0" style="border:0"
 id = "1"></iframe>
-
 
 <iframe class=iframe2 width="100%" height="100%" frameborder="0" style="border:0"
 id = "2"></iframe>
 </div>
+
+<button id="b" type="button" class="block" onclick="r()">Recipe</button>
 
 <script>
 var server = "http://35.203.43.136"
@@ -41,7 +41,23 @@ var info = JSON.parse(xmlHttp.responseText);
 
 document.getElementById(0).innerHTML=info["name"];
 document.getElementById(1).src="https://www.google.com/maps/embed/v1/search?q="+encodeURI(info["name"])+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM";
-document.getElementById(2).src=info["recipe_url"];
+
+var url = baseUrl + ":6969/api/link/" + info["id"];
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.open("GET", url, false);
+xmlHttp.send(null);
+
+if (xmlHttp.responseText == "True"){
+  document.getElementById(1).classList.add("iframe12");
+  document.getElementById(2).src=info["recipe_url"];
+  document.getElementById("b").style.visibility = "hidden";
+} else {
+  document.getElementById(1).classList.add("iframe11");
+}
+
+function r(){
+  window.open(info["recipe_url"], '_blank');
+}
 
 </script>
 
