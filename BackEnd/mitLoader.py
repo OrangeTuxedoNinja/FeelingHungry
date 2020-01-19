@@ -3,6 +3,7 @@ from typing import List
 from food import Food
 import foodProducer
 
+
 class MitLoader:
     def __init__(self):
         pass
@@ -20,12 +21,12 @@ class MitLoader:
             for instruct in recipe["instructions"]:
                 instructions += "<p>" + instruct["text"] + "<\p>"
             allow = True
-            for namew in recipe["name"].split(" "):
+            for namew in recipe["title"].split(" "):
                 if namew.strip().lower() in foodProducer.banned:
                     allow = False
                     break
             if allow:
-                name = recipe["name"]
+                name = recipe["title"]
                 if len(name) < 26 and (len(name) <= 2 or (name[-1] == "s" and name[-2] != "s")):
                     if name[-3:] == "ies":
                         name = name[:-3] + "y"
