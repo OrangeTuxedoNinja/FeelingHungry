@@ -33,7 +33,7 @@ class Food:
         return jsonpickle.encode(self)
 
     def findImage(self, type: str) -> None:
-        return search(type)
+        return search(type, 1)
 
     def how_healthy(self) -> int:
         """Returns a numerical value of how healthy an item is between 0-8"""
