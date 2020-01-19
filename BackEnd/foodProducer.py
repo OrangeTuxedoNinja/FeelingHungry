@@ -32,16 +32,15 @@ class FoodProducer:
             return self.cached_foods[food_name]
 
         ids = self.ai.search_index(food_name)
-        found_foods = [self.foods[id] for id in ids]
-        for food in found_foods:
-            if food.image_url is None:
-                print("Loading image")
-                food.findImage(food_name)
         ids = [(id, self.foods[id].num_leaves) for id in ids]
         ids.sort(key=lambda x: x[1])
         ids = [str(_id[0]) for _id in ids][::-1][:5]
+        found_foods = [self.foods[id] for id in ids]
+        for food in found_foods:
+            if food.image_url is None:
+                food.findImage(food_name)
         self.cached_foods[food_name] = ids
-        self.save()
+        # self.save()
         return self.cached_foods[food_name]
 
     def add_food(self, food_name: str) -> None:
