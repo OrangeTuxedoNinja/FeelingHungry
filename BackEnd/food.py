@@ -29,11 +29,12 @@ class Food:
         else:
             self.num_leaves = 3
 
-    def toJson(self):
+    def toJson(self) -> str:
         return jsonpickle.encode(self)
 
     def findImage(self, type: str) -> None:
-        return search(type, 1)
+        """findImage finds an image for this food"""
+        self.image_url = search(type, 1)
 
     def how_healthy(self) -> int:
         """Returns a numerical value of how healthy an item is between 0-8"""
