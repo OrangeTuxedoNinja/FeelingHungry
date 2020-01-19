@@ -8,7 +8,7 @@ from mitLoader import MitLoader
 import os.path
 from food import Food
 
-banned = ["dough", "spice", "sauce", "seasoning"]
+banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust"]
 
 
 class FoodProducer:
@@ -54,8 +54,6 @@ class FoodProducer:
                         if acc[food.name] > score:
                             ids.append((food.id, food.num_leaves))
                             chosen.append(food.name)
-                            print(food.image_url)
-                            print(type(food.image_url))
                             if food.image_url is None:
                                 print("Loading image")
                                 food.findImage(food_name)
@@ -63,17 +61,15 @@ class FoodProducer:
                                 break
             except Exception:
                 pass
-            print(ids)
-            ids.sort(key=lambda x: x[1])
-            print(ids)
-            ids = [_id[0] for _id in ids][:5]
             if len(ids) != 5:
                 self.add_food(food_name)
                 score -= 5
 
+        ids.sort(key=lambda x: x[1])
+        ids = [_id[0] for _id in ids][::-1][:5]
         self.cached_foods[food_name] = ids
         self.save()
-        return ids
+        return self.cached_foods[food_name]
 
     def add_food(self, food_name: str) -> None:
         for new_food in self.crawler.get_food(food_name):
