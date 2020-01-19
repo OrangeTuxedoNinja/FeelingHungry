@@ -2,6 +2,8 @@ from typing import List, Optional
 from epicurcrawler import Crawler
 import json
 from mitLoader import MitLoader
+import traceback
+import sys
 
 import os.path
 from food import Food
@@ -79,15 +81,17 @@ class FoodProducer:
     def load(self):
         """Either loads the self.foods array from the self created foods.json save or recreates it using the MIT dataset"""
         print("Loading recipes!")
+        traceback.print_stack(file=sys.stdout)
         if not os.path.isfile("foods.json"):
             loader = MitLoader()
-            self.foods = loader.load()[:50]
+            self.foods = loader.load()[:10000]
             print("Loaded: " + str(len(self.foods)) + " foods from MIT data source")
             self.save()
             return
 
         with open('foods.json', 'r') as fp:
             x = json.load(fp)
+            print(len(x))
             for i in x:
                 r = json.loads(i)
                 allow = True
