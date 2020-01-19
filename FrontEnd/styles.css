@@ -103,13 +103,16 @@ input[type=text] {
 .iframe {
   padding: 0 0 0 0;
   height: 100VH;
-  width: 30VW;
+  width: 35VW;
+  margin: 0;
 }
 
 .iframe2 {
   padding: 0 0 0 0;
-  width: 70VW;
   height: : 100VH;
+  width: 65VW;
+  margin: 0;
+  float: right;
 }
 
 #id1 {

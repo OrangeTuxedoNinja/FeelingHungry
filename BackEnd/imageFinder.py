@@ -1,0 +1,2 @@
+def getImage(food):
+    
