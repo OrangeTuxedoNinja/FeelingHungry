@@ -47,8 +47,8 @@ class FoodAi:
 
     def create_database(self):
         """Make xb database using spacy"""
-        # if os.path.exists('database'):
-        #     return self.load_database()
+        if os.path.exists('database'):
+            return self.load_database()
         print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
