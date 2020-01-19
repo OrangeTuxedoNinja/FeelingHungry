@@ -49,8 +49,4 @@ def search(keywords, max_results=None):
             continue;
 
     for obj in data["results"]:
-        return obj["url"]
-
-#  search("audi q6");
-if __name__ == "__main__":
-    print(search("burger", 1))
+        return obj["image"]
