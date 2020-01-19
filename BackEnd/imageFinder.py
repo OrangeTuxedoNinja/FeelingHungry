@@ -45,7 +45,8 @@ def search(keywords, max_results=None):
             data = json.loads(res.text);
             break;
         except ValueError as e:
-            time.sleep(5);
+            time.sleep(0.05);
+            print("oof")
             continue;
 
     for obj in data["results"]:
