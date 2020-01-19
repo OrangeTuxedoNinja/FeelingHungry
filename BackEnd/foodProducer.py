@@ -71,7 +71,6 @@ class FoodProducer:
             for food in self.foods:
                 c += 1
                 string = food.to_json()
-                print(string)
                 str_food.append(string)
                 if len(str_food) % 1000 == 0:
                     print("Jsonified " + str(c) + " recipes for saving!")
@@ -84,7 +83,7 @@ class FoodProducer:
         traceback.print_stack(file=sys.stdout)
         if not os.path.isfile("foods.json"):
             loader = MitLoader()
-            self.foods = loader.load()[:10000]
+            self.foods = loader.load()
             print("Loaded: " + str(len(self.foods)) + " foods from MIT data source")
             self.save()
             return
