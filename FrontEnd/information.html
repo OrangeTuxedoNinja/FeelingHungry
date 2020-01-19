@@ -47,7 +47,9 @@ var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, false);
 xmlHttp.send(null);
 
-if (xmlHttp.responseText == "True"){
+var re = xmlHttp.responseText;
+
+if (re == "True"){
   document.getElementById(1).classList.add("iframe12");
   document.getElementById(2).src=info["recipe_url"];
   document.getElementById("b").style.visibility = "hidden";
