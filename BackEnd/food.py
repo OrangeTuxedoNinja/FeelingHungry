@@ -5,7 +5,7 @@ from typing import Optional
 import urllib.parse
 import re
 from random import randint
-
+from imageFinder import *
 
 class Food:
     _id_counter = 0
@@ -33,22 +33,7 @@ class Food:
         return jsonpickle.encode(self)
 
     def findImage(self, type: str) -> None:
-        """Finds a image of this food using pixabay api. If it cant find an image it uses type"""
-        url = "https://pixabay.com/api/?key=14958320-84c9a72858b2f32099b33d787&q=" + urllib.parse.quote(self.name) + "&image_type=photo"
-        response = requests.get(url)
-        data = json.loads(response.text)
-        if len(data["hits"]) != 0:
-            url = data["hits"][0]["previewURL"]
-            self.image_url = url
-            return
-        url = "https://pixabay.com/api/?key=14958320-84c9a72858b2f32099b33d787&q=" + urllib.parse.quote(type) + "&image_type=photo"
-        response = requests.get(url)
-        data = json.loads(response.text)
-        if len(data["hits"]) != 0:
-            url = data["hits"][min(randint(0, len(data["hits"]) / 2 + 1), len(data["hits"]) - 1)]["previewURL"]
-            self.image_url = url
-            print("Setting url to : " + url)
-            return
+        return search(type)
 
     def how_healthy(self) -> int:
         """Returns a numerical value of how healthy an item is between 0-8"""

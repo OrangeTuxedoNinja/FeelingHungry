@@ -14,7 +14,7 @@ class FoodAi:
     import artificialintelligence as ai
     ai.dotheworkforme()"""
 
-    def __init__(self, foodprod: foodProducer.FoodProducer):
+    def __init__(self, foodprod):
         """Load spacy model from dataset"""
         self.model = spacy.load("en_core_web_md")
         self.foodprod = foodprod

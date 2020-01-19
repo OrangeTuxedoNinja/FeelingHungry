@@ -30,7 +30,9 @@ def main_page():
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
-    return jsonify(foodset.search_food(food))
+    result = foodset.search_food(food)
+    print("Foodset search: " + str(result))
+    return jsonify(result)
 
 
 @app.route("/api/food/<string:id>")
