@@ -6,12 +6,13 @@ import faiss
 import foodProducer
 import pickle
 import os.path
+import numpy as np
+
 
 class FoodAi:
     """
-import artificialintelligence as ai
-ai.dotheworkforme()
-    """
+    import artificialintelligence as ai
+    ai.dotheworkforme()"""
 
     def __init__(self, foodprod: foodProducer.FoodProducer):
         """Load spacy model from dataset"""
@@ -48,26 +49,32 @@ ai.dotheworkforme()
         """Make xb database using spacy"""
         if os.path.exists('database'):
             return self.load_database()
+        print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
         for recipe in all_foods:
             database.append(self.model.vocab[recipe.name].vector)
 
         # Save to file
-        with open('database', 'w') as f:
+        with open('database', 'wb') as f:
             pickle.dump(database, f)
 
-        return database
+        return np.array(database)
 
     def load_database(self):
         """Load xb database from file"""
-        with open('database', 'r') as f:
+        print("Loading database from file")
+        with open('database', 'rb') as f:
             database = pickle.load(f)
-        return database
+        return np.array(database)
 
     def search_index(self, term: str):
+        """Returns the 15 recipe indices/ids"""
         term = self.model.vocab[term]
-        return self.index.search(term.vector, 15)
+        D, I = self.index.search(np.array([term.vector]), 15)
+        print(D)
+        print(I)
+        return I[0]
 
 
 if __name__ == '__main__':

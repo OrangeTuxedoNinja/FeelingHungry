@@ -7,6 +7,7 @@ from mitLoader import MitLoader
 
 import os.path
 from food import Food
+from foodAI import FoodAi
 
 banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust", "rub"]
 
@@ -18,6 +19,7 @@ class FoodProducer:
         # self.word_model = api.load('glove-wiki-gigaword-50')
         self.cached_foods = {}
         self.crawler = Crawler()
+        self.ai = FoodAi(self)
 
     def get_food(self, food_id: str) -> Optional[Food]:
         for food in self.foods:
@@ -29,42 +31,13 @@ class FoodProducer:
         if food_name in self.cached_foods:
             return self.cached_foods[food_name]
 
-        ids = []
-        chosen = []
-        c = 0
-        score = 50
-        while len(ids) <= 9:
-            c += 1
-            if c > 20:
-                print("Could not find results")
-                return [x.id for x in self.foods[:10]]
-            try:
-                acc = {}
-
-                # Do the ai thing
-                names = process.extract(food_name, [x.name for x in self.foods],
-                                        limit=20)
-
-                for name in names:
-                    acc[name[0]] = name[1]
-                names = [name[0] for name in names]
-
-                for food in self.foods:
-                    if food.name in names and food.name not in chosen and food.num_leaves >= 1:
-                        if acc[food.name] > score:
-                            ids.append((food.id, food.num_leaves))
-                            chosen.append(food.name)
-                            if food.image_url is None:
-                                print("Loading image")
-                                food.findImage(food_name)
-                            if len(ids) == 10:
-                                break
-            except Exception:
-                pass
-            if len(ids) != 5:
-                self.add_food(food_name)
-                score -= 5
-
+        ids = self.ai.search_index(food_name)
+        found_foods = [self.foods[id] for id in ids]
+        for food in found_foods:
+            if food.image_url is None:
+                print("Loading image")
+                food.findImage(food_name)
+        ids = [(id, self.foods[id].num_leaves) for id in ids]
         ids.sort(key=lambda x: x[1])
         ids = [_id[0] for _id in ids][::-1][:5]
         self.cached_foods[food_name] = ids
