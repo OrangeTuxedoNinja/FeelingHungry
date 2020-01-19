@@ -42,14 +42,12 @@ var info = JSON.parse(xmlHttp.responseText);
 document.getElementById(0).innerHTML=info["name"];
 document.getElementById(1).src="https://www.google.com/maps/embed/v1/search?q="+encodeURI(info["name"])+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM";
 
-var url = baseUrl + ":6969/api/link/" + info["id"];
+var url = baseUrl + "/api/link/" + info["id"];
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, false);
 xmlHttp.send(null);
 
-var re = xmlHttp.responseText;
-
-if (re == "True"){
+if (xmlHttp.responseText == "True"){
   document.getElementById(1).classList.add("iframe12");
   document.getElementById(2).src=info["recipe_url"];
   document.getElementById("b").style.visibility = "hidden";
