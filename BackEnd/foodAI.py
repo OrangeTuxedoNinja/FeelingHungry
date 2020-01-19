@@ -56,7 +56,7 @@ class FoodAi:
         # Multi word processing
         for recipe in all_foods:
             vectors = []  # List containing all word vectors
-            for word in recipe.split(' '):
+            for word in recipe.name.split(' '):
                 vectors.append(self.model(word).vector)
             maxmin = []
             for i in range(len(vectors[0])):
