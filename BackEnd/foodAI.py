@@ -35,10 +35,12 @@ class FoodAi:
         xb = self.create_database()
 
         index = faiss.IndexFlatL2(300)  # build the index
+        print("In create index")
         print(index.is_trained)
         index.add(xb)  # add vectors to the index
         print(index.ntotal)
         print(xb.shape)
+        print("Returning from create index")
         return index
 
     def create_database(self):

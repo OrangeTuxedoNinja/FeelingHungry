@@ -68,7 +68,9 @@ class FoodProducer:
             c = 0
             for food in self.foods:
                 c += 1
-                str_food.append(food.to_json())
+                string = food.to_json()
+                print(string)
+                str_food.append(string)
                 if len(str_food) % 1000 == 0:
                     print("Jsonified " + str(c) + " recipes for saving!")
             print("Saving: " + str(len(str_food)) + " recipes!")
@@ -79,7 +81,7 @@ class FoodProducer:
         print("Loading recipes!")
         if not os.path.isfile("foods.json"):
             loader = MitLoader()
-            self.foods = loader.load()
+            self.foods = loader.load()[:50]
             print("Loaded: " + str(len(self.foods)) + " foods from MIT data source")
             self.save()
             return

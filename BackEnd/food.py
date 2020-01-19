@@ -18,7 +18,7 @@ class Food:
         self.name = str.join(" ", [word for word in name.split(" ") if not re.search(r'[\d,#:()]', word.strip())])
         self.image_url = image_url
         self.recipe_url = recipe_url
-        self.recipe_html = recipe_html
+        # self.recipe_html = recipe_html
         self.fat_level = fat_level
         self.salt_level = salt_level
         self.saturates_level = saturates_level
