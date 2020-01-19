@@ -46,7 +46,7 @@ class FoodProducer:
         found_foods = [self.foods[id] for id in ids]
         for food in found_foods:
             if food.image_url is None:
-                food.findImage(food_name)
+                food.findImage(food.name)
         self.cached_foods[food_name] = ids
         # self.save()
         return self.cached_foods[food_name]
