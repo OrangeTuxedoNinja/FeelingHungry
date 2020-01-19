@@ -67,6 +67,9 @@ class FoodProducer:
             str_food = []
             for food in self.foods:
                 str_food.append(food.to_json())
+                if len(str_food) % 1000 == 0:
+                    print("Jsonified " + str(c) + " recipes for saving!")
+            print("Saving: " + str(len(str_food)) + " recipes!")
             json.dump(str_food, fp)
 
     def load(self):
@@ -94,4 +97,4 @@ class FoodProducer:
                             name = name[:-3] + "y"
                         name = name[:-1]
                     self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
-        print("Loaded: " + str(len(self.foods)))
+        print("Loaded recipes: " + str(len(self.foods)))

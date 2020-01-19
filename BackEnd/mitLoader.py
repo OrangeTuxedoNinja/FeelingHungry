@@ -20,6 +20,7 @@ class MitLoader:
             instructions += "<p> INSTRUCTIONS: </p>"
             for instruct in recipe["instructions"]:
                 instructions += "<p>" + instruct["text"] + "<\p>"
+
             allow = True
             for namew in recipe["title"].split(" "):
                 if namew.strip().lower() in foodProducer.banned:
@@ -33,5 +34,4 @@ class MitLoader:
                     name = name[:-1]
                 food.append(Food(name, None, recipe["url"], instructions, recipe["fsa_lights_per100g"]["fat"],
                                  recipe["fsa_lights_per100g"]["salt"], recipe["fsa_lights_per100g"]["saturates"], recipe["fsa_lights_per100g"]["sugars"]))
-
         return food
