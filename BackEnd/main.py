@@ -41,14 +41,15 @@ def get_food(id: str):
     return food.toJson()
 
 
-@app.route("/api/link/<string:url>")
-def does_site_load(url: str):
-    req = requests.get(url)
+@app.route("/api/link/<string:id>")
+def does_site_load(id: str):
+    f = foodset.get_food(int(id))
+    req = requests.get(f.recipe_url)
     if "X-Frame-Options" not in req.headers:
-        return True
+        return "True"
     elif req.headers["X-Frame-Options"].strip().lower() in ["deny", "sameorigin"]:
-        return False
-    return True
+        return "False"
+    return "True"
 
 
 if __name__ == '__main__':
