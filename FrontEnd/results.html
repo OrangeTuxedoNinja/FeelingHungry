@@ -60,7 +60,7 @@ var local = "http://0.0.0.0"
 var baseUrl = server
 
 var a = window.location.href.split("=")
-var url = baseUrl + ":6969/api/search/" + window.location.href.split("=")[a.length - 1];
+var url = baseUrl + "/api/search/" + window.location.href.split("=")[a.length - 1];
 
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, false);
@@ -69,7 +69,7 @@ var ids = JSON.parse(xmlHttp.responseText);
 var foods = [];
 for (var i = 0; i < ids.length; i++){
   var xmlHttp = new XMLHttpRequest();
-  xmlHttp.open("GET",  baseUrl + ":6969/api/food/" + ids[i], false);
+  xmlHttp.open("GET",  baseUrl + "/api/food/" + ids[i], false);
   xmlHttp.send(null);
   foods.push(JSON.parse(xmlHttp.responseText))
 }
