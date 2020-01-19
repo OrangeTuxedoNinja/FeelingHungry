@@ -89,7 +89,7 @@ class FoodProducer:
                         break
                 if allow:
                     name = r["name"]
-                    if len(name) <= 2 or (name[-1] == "s" and name[-2] != "s"):
+                    if len(name) < 26 and (len(name) <= 2 or (name[-1] == "s" and name[-2] != "s")):
                         if name[-3:] == "ies":
                             name = name[:-3] + "y"
                         name = name[:-1]
