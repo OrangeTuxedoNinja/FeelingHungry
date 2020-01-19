@@ -45,7 +45,7 @@ class FoodProducer:
         found_foods = [self.foods[id] for id in ids]
         for food in found_foods:
             if food.image_url is None:
-                food.findImage(food.name)
+                food.find_image(food.name)
         self.cached_foods[food_name] = ids
         # self.save()
         return self.cached_foods[food_name]
@@ -66,7 +66,7 @@ class FoodProducer:
         with open('foods.json', 'w') as fp:
             str_food = []
             for food in self.foods:
-                str_food.append(food.toJson())
+                str_food.append(food.to_json())
             json.dump(str_food, fp)
 
     def load(self):
