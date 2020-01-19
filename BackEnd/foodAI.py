@@ -51,7 +51,7 @@ ai.dotheworkforme()
         database = []
         all_foods = self.foodprod.foods
         for recipe in all_foods:
-            database.append(self.model.vocab[recipe.name])
+            database.append(self.model.vocab[recipe.name].vector)
 
         # Save to file
         with open('database', 'w') as f:
