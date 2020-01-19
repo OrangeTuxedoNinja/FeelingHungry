@@ -42,7 +42,7 @@ var info = JSON.parse(xmlHttp.responseText);
 document.getElementById(0).innerHTML=info["name"];
 document.getElementById(1).src="https://www.google.com/maps/embed/v1/search?q="+encodeURI(info["name"])+"&key=AIzaSyCSMgc-TJTOaqnQOzmgOQeNzGzzrf_cpRM";
 
-var url = baseUrl + ":6969/api/link/" + info["id"];
+var url = baseUrl + "/api/link/" + info["id"];
 var xmlHttp = new XMLHttpRequest();
 xmlHttp.open("GET", url, false);
 xmlHttp.send(null);
