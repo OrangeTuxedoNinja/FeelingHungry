@@ -101,5 +101,5 @@ class FoodProducer:
                         if name[-3:] == "ies":
                             name = name[:-3] + "y"
                         name = name[:-1]
-                    self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                    self.foods.append(Food(name, r["image_url"], r["recipe_url"], "", r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
         print("Loaded recipes: " + str(len(self.foods)) + " from database")
