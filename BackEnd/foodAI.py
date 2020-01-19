@@ -38,6 +38,7 @@ class FoodAi:
         print(index.is_trained)
         index.add(xb)  # add vectors to the index
         print(index.ntotal)
+        print(xb.shape)
         return index
 
     def create_database(self):
