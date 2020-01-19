@@ -47,13 +47,16 @@ class FoodAi:
 
     def create_database(self):
         """Make xb database using spacy"""
-        if os.path.exists('database'):
-            return self.load_database()
+        # if os.path.exists('database'):
+        #     return self.load_database()
         print("Creating new database...")
         database = []
-        all_foods = self.foodprod.foods
+        all_foods = self.foodprod.foods[:100]
         for recipe in all_foods:
-            database.append(self.model.vocab[recipe.name].vector)
+            vec = self.model.vocab[recipe.name].vector
+            print(recipe.name)
+            print(vec[:10])
+            database.append(vec)
 
         # Save to file
         with open('database', 'wb') as f:
@@ -76,8 +79,8 @@ class FoodAi:
         print(I)
         return I[0]
 
-
-if __name__ == '__main__':
-    thing = FoodAi(foodProducer.FoodProducer())
-    print(thing.get_similar_foods('pasta', 15))
-    print(thing.search_index('pizza'))
+#
+# if __name__ == '__main__':
+#     thing = FoodAi(foodProducer.FoodProducer())
+#     print(thing.get_similar_foods('pasta', 15))
+#     print(thing.search_index('pizza'))
