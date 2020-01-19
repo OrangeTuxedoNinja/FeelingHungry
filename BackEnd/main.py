@@ -3,6 +3,7 @@ from food import Food
 from foodProducer import FoodProducer
 from flask_cors import CORS
 import requests
+import urllib.parse
 
 app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_folder="../FrontEnd")
 foodset = FoodProducer()
@@ -30,6 +31,7 @@ def main_page():
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
+    food = urllib.parse.unquote(food)
     result = foodset.search_food(food)
     print("Foodset search: " + str(result))
     return jsonify(result)

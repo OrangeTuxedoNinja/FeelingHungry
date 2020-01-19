@@ -51,6 +51,6 @@ class Crawler:
                 iurl = "https://elitescreens.com/images/product_album/no_image.png"
                 continue
             html_recipe = recipe_bs.select(".recipe-content")[0].text
-            food = Food(f_name, iurl, url, html_recipe, "green", "green", "green", "green")
+            food = Food(f_name, iurl, url, html_recipe, "red", "red", "red", "red")
             foods.append(food)
         return foods
