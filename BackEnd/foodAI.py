@@ -20,11 +20,9 @@ class FoodAi:
         self.foodprod = foodprod
         self.index = self.create_index()
 
-        def get_similar_foods(self, word: str, topn: int) -> List[str]:
-            """
-        returns a list (no duplicates) of similar foods
+    def get_similar_foods(self, word: str, topn: int) -> List[str]:
+        """returns a list (no duplicates) of similar foods
         """
-
         word = self.model.vocab[word]
         queries = [w for w in word.vocab if
                    w.is_lower == word.is_lower and w.prob >= -15]
