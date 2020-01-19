@@ -1,5 +1,4 @@
-"""uses word2vec to give a list of similar foods."""
-
+"""uses spacy to give a list of similar foods."""
 import spacy
 from typing import List
 import faiss
@@ -21,8 +20,7 @@ class FoodAi:
         self.index = self.create_index()
 
     def get_similar_foods(self, word: str, topn: int) -> List[str]:
-        """returns a list (no duplicates) of similar foods
-        """
+        """Outdated: returns a list (no duplicates) of similar foods"""
         word = self.model.vocab[word]
         queries = [w for w in word.vocab if
                    w.is_lower == word.is_lower and w.prob >= -15]
@@ -33,7 +31,6 @@ class FoodAi:
 
     def create_index(self):
         """ Creates index in Faiss."""
-
         # Get word embeddings from model
         xb = self.create_database()
 
@@ -50,22 +47,9 @@ class FoodAi:
         print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
-
-        # Multi word processing
         for recipe in all_foods:
-            # List containing all word vectors
-            vectors = None
-            for word in recipe.name.split(' '):
-                if vectors is None:
-                    vectors = self.model(word).vector
-                else:
-                    vectors = np.dstack((self.model(word).vector, vectors))
-            min = np.amin(vectors, axis=1)
-            max = np.amax(vectors, axis=2)
-            maxmin = np.hstack([min, max])
-            database.append(maxmin)
-            # vec = self.model(recipe.name).vector
-            # database.append(vec)
+            vec = self.model(recipe.name).vector
+            database.append(vec)
 
         # Save to file
         with open('database', 'wb') as f:
@@ -84,12 +68,9 @@ class FoodAi:
         """Returns the 15 recipe indices/ids"""
         term = self.model.vocab[term]
         D, I = self.index.search([np.hstack([term.vector, term.vector])], 30)
-        print(D)
-        print(I)
         return I[0]
 
-#
-# if __name__ == '__main__':
-#     thing = FoodAi(foodProducer.FoodProducer())
-#     print(thing.get_similar_foods('pasta', 15))
-#     print(thing.search_index('pizza'))
+
+ if __name__ == '__main__':
+     thing = FoodAi(foodProducer.FoodProducer())
+     print(thing.search_index('pizza'))

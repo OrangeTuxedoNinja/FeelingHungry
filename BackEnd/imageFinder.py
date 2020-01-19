@@ -1,21 +1,22 @@
-import requests;
-import re;
-import json;
-import time;
+import requests
+import re
+import json
+import time
+
 
 def search(keywords, max_results=None):
-    url = 'https://duckduckgo.com/';
+    url = 'https://duckduckgo.com/'
     params = {
-    	'q': keywords
-    };
+        'q': keywords
+    }
 
     #   First make a request to above URL, and parse out the 'vqd'
     #   This is a special token, which should be used in the subsequent request
     res = requests.post(url, data=params)
-    searchObj = re.search(r'vqd=([\d-]+)\&', res.text, re.M|re.I);
+    searchObj = re.search(r'vqd=([\d-]+)\&', res.text, re.M|re.I)
 
     if not searchObj:
-        return -1;
+        return -1
 
     headers = {
         'dnt': '1',
@@ -37,17 +38,15 @@ def search(keywords, max_results=None):
     ('p', '2')
     )
 
-    requestUrl = url + "i.js";
+    request_url = url + "i.js"
 
     while True:
         try:
-            res = requests.get(requestUrl, headers=headers, params=params);
-            data = json.loads(res.text);
-            break;
+            res = requests.get(request_url, headers=headers, params=params)
+            data = json.loads(res.text)
+            for obj in data["results"]:
+                return obj["image"]
         except ValueError as e:
-            time.sleep(0.05);
+            time.sleep(0.05)
             print("oof")
-            continue;
-
-    for obj in data["results"]:
-        return obj["image"]
+            continue

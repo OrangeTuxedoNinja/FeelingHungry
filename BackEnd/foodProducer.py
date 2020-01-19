@@ -1,5 +1,4 @@
 from typing import List, Optional
-from fuzzywuzzy import fuzz, process
 from epicurcrawler import Crawler
 import json
 from mitLoader import MitLoader
@@ -95,6 +94,3 @@ class FoodProducer:
                         name = name[:-1]
                     self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
         print("Loaded: " + str(len(self.foods)))
-
-
-
