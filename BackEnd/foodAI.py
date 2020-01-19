@@ -47,23 +47,25 @@ class FoodAi:
 
     def create_database(self):
         """Make xb database using spacy"""
-        # if os.path.exists('database'):
-        #     return self.load_database()
+        if os.path.exists('database'):
+             return self.load_database()
         print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
 
         # Multi word processing
         for recipe in all_foods:
-            vectors = []  # List containing all word vectors
+            # List containing all word vectors
+            vectors = None
             for word in recipe.name.split(' '):
-                vectors.append(self.model(word).vector)
-            maxmin = []
-            for i in range(len(vectors[0])):
-                maxmin.append(max(vector[i] for vector in vectors))
-                maxmin.append(min(vector[i] for vector in vectors))
-            vec = np.array(maxmin)
-            database.append(vec)
+                if vectors is None:
+                    vectors = self.model(word).vector
+                else:
+                    vectors = np.dstack((self.model(word).vector, vectors))
+            min = np.amin(vectors, axis=1)
+            max = np.amax(vectors, axis=2)
+            maxmin = np.stack([min, max])
+            database.append(maxmin)
             # vec = self.model(recipe.name).vector
             # database.append(vec)
 
