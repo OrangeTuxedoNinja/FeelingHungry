@@ -61,7 +61,7 @@ ai.dotheworkforme()
 
     def load_database(self):
         """Load xb database from file"""
-        with open('database', 'r') as f:
+        with open('database', 'rb') as f:
             database = pickle.load(f)
         return database
 
