@@ -31,7 +31,7 @@ def main_page():
 
 @app.route("/api/search/<string:food>")
 def search_food(food):
-    food = urllib.parse.unquote(food)
+    food = urllib.parse.unquote_plus(urllib.parse.unquote(food))
     result = foodset.search_food(food)
     print("Foodset search: " + str(result))
     return jsonify(result)
