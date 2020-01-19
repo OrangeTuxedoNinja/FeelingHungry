@@ -91,7 +91,7 @@ class FoodProducer:
 
         with open('foods.json', 'r') as fp:
             x = json.load(fp)
-            print(len(x))
+            print("lines in json: " + str(len(x)))
             for i in x:
                 r = json.loads(i)
                 allow = True
@@ -106,4 +106,8 @@ class FoodProducer:
                             name = name[:-3] + "y"
                         name = name[:-1]
                     self.foods.append(Food(name, r["image_url"], r["recipe_url"], "", r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                    continue
+                print("THIS ONE IS NOT SAVED: " + i)
+            else:
+                print("Did not end early!")
         print("Loaded recipes: " + str(len(self.foods)) + " from database")
