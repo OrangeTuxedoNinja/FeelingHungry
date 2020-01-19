@@ -16,8 +16,8 @@ ai.dotheworkforme()
     def __init__(self, foodprod: foodProducer.FoodProducer):
         """Load spacy model from dataset"""
         self.model = spacy.load("en_core_web_md")
-        self.index = self.create_index()
         self.foodprod = foodprod
+        self.index = self.create_index()
 
     def get_similar_foods(self, word: str, topn: int) -> List[str]:
         """
