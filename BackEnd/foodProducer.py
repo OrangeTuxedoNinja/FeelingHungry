@@ -39,7 +39,7 @@ class FoodProducer:
                 food.findImage(food_name)
         ids = [(id, self.foods[id].num_leaves) for id in ids]
         ids.sort(key=lambda x: x[1])
-        ids = [_id[0] for _id in ids][::-1][:5]
+        ids = [str(_id[0]) for _id in ids][::-1][:5]
         self.cached_foods[food_name] = ids
         self.save()
         return self.cached_foods[food_name]
