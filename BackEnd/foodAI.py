@@ -34,7 +34,7 @@ class FoodAi:
         # Get word embeddings from model
         xb = self.create_database()
 
-        index = faiss.IndexFlatL2(600)  # build the index
+        index = faiss.IndexFlatL2(300)  # build the index
         print(index.is_trained)
         index.add(xb)  # add vectors to the index
         print(index.ntotal)
@@ -70,11 +70,11 @@ class FoodAi:
         possibilites = []
         for t in terms:
             term = self.model.vocab[t]
-            D, I = self.index.search([np.hstack([term.vector, term.vector])], 30 // len(terms))
+            D, I = self.index.search(np.array([term.vector]), 30 // len(terms))
             possibilites.extend(I[0])
         return possibilites
 
 
- if __name__ == '__main__':
-     thing = FoodAi(foodProducer.FoodProducer())
-     print(thing.search_index('pizza'))
+if __name__ == '__main__':
+    thing = FoodAi(foodProducer.FoodProducer())
+    print(thing.search_index('pizza'))
