@@ -51,11 +51,9 @@ class FoodAi:
         #     return self.load_database()
         print("Creating new database...")
         database = []
-        all_foods = self.foodprod.foods[:100]
+        all_foods = self.foodprod.foods
         for recipe in all_foods:
             vec = self.model(recipe.name).vector
-            print(recipe.name)
-            print(vec[:10])
             database.append(vec)
 
         # Save to file
