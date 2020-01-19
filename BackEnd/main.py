@@ -42,7 +42,7 @@ def get_food(id: str):
     food = foodset.get_food(int(id))
     if food is None:
         return {}
-    return food.toJson()
+    return food.to_json()
 
 
 @app.route("/api/link/<string:id>")
