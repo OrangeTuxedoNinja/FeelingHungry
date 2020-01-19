@@ -2,9 +2,7 @@
 
 import spacy
 from typing import List
-
-
-# import faiss
+import faiss
 
 
 class FoodAi:
@@ -29,6 +27,10 @@ ai.dotheworkforme()
                                reverse=True)
         return [w.lower_ for w in by_similarity[:topn + 1]
                 if w.lower_ != word.lower_]
+
+    def create_index(self):
+        """ Creates index in Faiss."""
+        pass
 
 
 if __name__ == '__main__':
