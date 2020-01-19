@@ -8,7 +8,7 @@ from mitLoader import MitLoader
 import os.path
 from food import Food
 
-banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust"]
+banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust", "rub"]
 
 
 class FoodProducer:
