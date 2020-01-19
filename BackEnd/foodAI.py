@@ -53,7 +53,7 @@ class FoodAi:
         database = []
         all_foods = self.foodprod.foods[:100]
         for recipe in all_foods:
-            vec = self.model.vocab[recipe.name].vector
+            vec = self.model(recipe.name).vector
             print(recipe.name)
             print(vec[:10])
             database.append(vec)
