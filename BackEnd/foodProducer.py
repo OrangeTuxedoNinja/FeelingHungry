@@ -4,7 +4,6 @@ from epicurcrawler import Crawler
 import json
 from mitLoader import MitLoader
 
-
 import os.path
 from food import Food
 from foodAI import FoodAi
@@ -21,7 +20,7 @@ class FoodProducer:
         self.crawler = Crawler()
         self.ai = FoodAi(self)
 
-    def get_food(self, food_id: str) -> Optional[Food]:
+    def get_food(self, food_id: int) -> Optional[Food]:
         for food in self.foods:
             if food.id == food_id:
                 return food
@@ -35,7 +34,7 @@ class FoodProducer:
         ids = self.ai.search_index(food_name)
         _ids = []
         for id in ids:
-            f = self.foods[id].name
+            f = self.foods[id].name.lower().strip()
             if f not in names:
                 _ids.append(id)
                 names.append(f)
@@ -89,7 +88,12 @@ class FoodProducer:
                         allow = False
                         break
                 if allow:
-                    self.foods.append(Food(r["name"], r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                    name = r["name"]
+                    if name[-1] == "s" and name[-2] != "s":
+                        if name[-3:] == "ies":
+                            name = name[:-3] + "y"
+                        name = name[:-1]
+                    self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
         print("Loaded: " + str(len(self.foods)))
 
 

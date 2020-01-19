@@ -24,7 +24,7 @@ class Food:
         self.sugars_level = sugars_level
         if self.how_healthy() < 6:
             self.num_leaves = 1
-        elif self.how_healthy() < 9:
+        elif self.how_healthy() < 10:
             self.num_leaves = 2
         else:
             self.num_leaves = 3

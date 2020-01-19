@@ -20,8 +20,8 @@ class FoodAi:
         self.foodprod = foodprod
         self.index = self.create_index()
 
-    def get_similar_foods(self, word: str, topn: int) -> List[str]:
-        """
+        def get_similar_foods(self, word: str, topn: int) -> List[str]:
+            """
         returns a list (no duplicates) of similar foods
         """
 
