@@ -31,7 +31,15 @@ class FoodProducer:
         if food_name in self.cached_foods:
             return self.cached_foods[food_name]
 
+        names = []
         ids = self.ai.search_index(food_name)
+        _ids = []
+        for id in ids:
+            f = self.foods[id].name
+            if f not in names:
+                _ids.append(id)
+                names.append(f)
+        ids = _ids
         ids = [(id, self.foods[id].num_leaves) for id in ids]
         ids.sort(key=lambda x: x[1])
         ids = [int(str(_id[0])) for _id in ids][::-1][:5]
