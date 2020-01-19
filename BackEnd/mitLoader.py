@@ -31,7 +31,7 @@ class MitLoader:
                     if name[-3:] == "ies":
                         name = name[:-3] + "y"
                     name = name[:-1]
-                    food.append(Food(name, None, recipe["url"], instructions, recipe["fsa_lights_per100g"]["fat"],
-                                     recipe["fsa_lights_per100g"]["salt"], recipe["fsa_lights_per100g"]["saturates"], recipe["fsa_lights_per100g"]["sugars"]))
+                food.append(Food(name, None, recipe["url"], instructions, recipe["fsa_lights_per100g"]["fat"],
+                                 recipe["fsa_lights_per100g"]["salt"], recipe["fsa_lights_per100g"]["saturates"], recipe["fsa_lights_per100g"]["sugars"]))
 
         return food

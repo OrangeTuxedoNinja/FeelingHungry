@@ -50,7 +50,7 @@ class FoodAi:
         c = 0
         for recipe in all_foods:
             c += 1
-            if c % 1000:
+            if c % 1000 == 0:
                 print("Loaded " + str(c) + "/" + str(len(all_foods)) + " recipes.")
             vec = self.model(recipe.name).vector
             database.append(vec)
