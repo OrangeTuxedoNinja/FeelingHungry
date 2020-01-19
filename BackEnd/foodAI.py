@@ -2,7 +2,9 @@
 
 import spacy
 from typing import List
-import faiss
+
+
+# import faiss
 
 
 class FoodAi:
@@ -20,17 +22,17 @@ ai.dotheworkforme()
         returns a list (no duplicates) of similar foods
         """
 
-        word = self.model.vocab[str(word)]
+        word = self.model.vocab[word]
         queries = [w for w in word.vocab if
                    w.is_lower == word.is_lower and w.prob >= -15]
         by_similarity = sorted(queries, key=lambda w: word.similarity(w),
                                reverse=True)
         return [w.lower_ for w in by_similarity[:topn + 1]
-                  if w.lower_ != word.lower_]
+                if w.lower_ != word.lower_]
 
 
 if __name__ == '__main__':
     thing = FoodAi()
-    thing.get_similar_foods('hot dog', 15)
+    print(thing.get_similar_foods('pasta', 15))
     #
     # get_similar_foods(model, 'pasta', 10)
