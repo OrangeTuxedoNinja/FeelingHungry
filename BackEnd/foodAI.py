@@ -8,11 +8,11 @@ import pickle
 import os.path
 import numpy as np
 
+
 class FoodAi:
     """
-import artificialintelligence as ai
-ai.dotheworkforme()
-    """
+    import artificialintelligence as ai
+    ai.dotheworkforme()"""
 
     def __init__(self, foodprod: foodProducer.FoodProducer):
         """Load spacy model from dataset"""
@@ -69,11 +69,12 @@ ai.dotheworkforme()
         return np.array(database)
 
     def search_index(self, term: str):
+        """Returns the 15 recipe indices/ids"""
         term = self.model.vocab[term]
         D, I = self.index.search(np.array([term.vector]), 15)
         print(D)
         print(I)
-        return I
+        return I[0]
 
 
 if __name__ == '__main__':
