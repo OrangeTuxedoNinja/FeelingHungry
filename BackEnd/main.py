@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, jsonify
 from food import Food
 from foodProducer import FoodProducer
 from flask_cors import CORS
+import requests
 
 app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_folder="../FrontEnd")
 foodset = FoodProducer()
@@ -38,6 +39,16 @@ def get_food(id: str):
     if food is None:
         return {}
     return food.toJson()
+
+
+@app.route("/api/link/<string:url>")
+def does_site_load(url: str):
+    req = requests.get(url)
+    if "X-Frame-Options" not in req.headers:
+        return True
+    elif req.headers["X-Frame-Options"].strip().lower() in ["deny", "sameorigin"]:
+        return False
+    return True
 
 
 if __name__ == '__main__':
