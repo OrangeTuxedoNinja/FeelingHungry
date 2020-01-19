@@ -54,13 +54,15 @@ ai.dotheworkforme()
             database.append(self.model.vocab[recipe.name])
 
         # Save to file
-        pickle.dump(database, 'database')
+        with open('database', 'w') as f:
+            pickle.dump(database, f)
 
         return database
 
     def load_database(self):
         """Load xb database from file"""
-        database = pickle.load('database')
+        with open('database', 'r') as f:
+            database = pickle.load(f)
         return database
 
     def search_index(self, term: str):
