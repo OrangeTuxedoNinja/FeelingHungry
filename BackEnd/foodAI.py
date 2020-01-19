@@ -3,7 +3,9 @@
 import spacy
 from typing import List
 import faiss
-
+import foodProducer
+import pickle
+import os.path
 
 class FoodAi:
     """
@@ -11,9 +13,11 @@ import artificialintelligence as ai
 ai.dotheworkforme()
     """
 
-    def __init__(self):
+    def __init__(self, foodprod: foodProducer.FoodProducer):
         """Load spacy model from dataset"""
         self.model = spacy.load("en_core_web_md")
+        self.index = self.create_index()
+        self.foodprod = foodprod
 
     def get_similar_foods(self, word: str, topn: int) -> List[str]:
         """
@@ -30,11 +34,41 @@ ai.dotheworkforme()
 
     def create_index(self):
         """ Creates index in Faiss."""
-        pass
+
+        # Get word embeddings from model
+        xb = self.create_database()
+
+        index = faiss.IndexFlatL2(300)  # build the index
+        print(index.is_trained)
+        index.add(xb)  # add vectors to the index
+        print(index.ntotal)
+        return index
+
+    def create_database(self):
+        """Make xb database using spacy"""
+        if os.path.exists('database'):
+            return self.load_database()
+        database = []
+        all_foods = self.foodprod.foods
+        for recipe in all_foods:
+            database.append(self.model.vocab[recipe.name])
+
+        # Save to file
+        pickle.dump(database, 'database')
+
+        return database
+
+    def load_database(self):
+        """Load xb database from file"""
+        database = pickle.load('database')
+        return database
+
+    def search_index(self, term: str):
+        term = self.model.vocab[term]
+        return self.index.search(term.vector, 15)
 
 
 if __name__ == '__main__':
-    thing = FoodAi()
+    thing = FoodAi(foodProducer.FoodProducer())
     print(thing.get_similar_foods('pasta', 15))
-    #
-    # get_similar_foods(model, 'pasta', 10)
+    print(thing.search_index('pizza'))
