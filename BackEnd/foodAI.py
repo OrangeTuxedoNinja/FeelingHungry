@@ -75,6 +75,6 @@ class FoodAi:
         return possibilites
 
 
- if __name__ == '__main__':
-     thing = FoodAi(foodProducer.FoodProducer())
-     print(thing.search_index('pizza'))
+if __name__ == '__main__':
+    thing = FoodAi(foodProducer.FoodProducer())
+    print(thing.search_index('pizza'))
