@@ -7,7 +7,7 @@ import os.path
 from food import Food
 from foodAI import FoodAi
 
-banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust", "rub", "hour"]
+banned = ["dough", "spice", "sauce", "seasoning", "my", "season", "crust", "rub", "hour", "marinade"]
 
 
 class FoodProducer:
