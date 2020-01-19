@@ -65,7 +65,9 @@ class FoodProducer:
     def save(self):
         with open('foods.json', 'w') as fp:
             str_food = []
+            c = 0
             for food in self.foods:
+                c += 1
                 str_food.append(food.to_json())
                 if len(str_food) % 1000 == 0:
                     print("Jsonified " + str(c) + " recipes for saving!")
@@ -74,6 +76,7 @@ class FoodProducer:
 
     def load(self):
         """Either loads the self.foods array from the self created foods.json save or recreates it using the MIT dataset"""
+        print("Loading recipes!")
         if not os.path.isfile("foods.json"):
             loader = MitLoader()
             self.foods = loader.load()
@@ -97,4 +100,4 @@ class FoodProducer:
                             name = name[:-3] + "y"
                         name = name[:-1]
                     self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
-        print("Loaded recipes: " + str(len(self.foods)))
+        print("Loaded recipes: " + str(len(self.foods)) + " from database")
