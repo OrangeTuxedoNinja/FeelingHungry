@@ -39,7 +39,7 @@ class FoodAi:
         # Get word embeddings from model
         xb = self.create_database()
 
-        index = faiss.IndexFlatL2(300)  # build the index
+        index = faiss.IndexFlatL2(600)  # build the index
         print(index.is_trained)
         index.add(xb)  # add vectors to the index
         print(index.ntotal)
@@ -47,14 +47,25 @@ class FoodAi:
 
     def create_database(self):
         """Make xb database using spacy"""
-        if os.path.exists('database'):
-            return self.load_database()
+        # if os.path.exists('database'):
+        #     return self.load_database()
         print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
+
+        # Multi word processing
         for recipe in all_foods:
-            vec = self.model(recipe.name).vector
+            vectors = []  # List containing all word vectors
+            for word in recipe.split(' '):
+                vectors.append(self.model(word).vector)
+            maxmin = []
+            for i in range(len(vectors[0])):
+                maxmin.append(max(vector[i] for vector in vectors))
+                maxmin.append(min(vector[i] for vector in vectors))
+            vec = np.array(maxmin)
             database.append(vec)
+            # vec = self.model(recipe.name).vector
+            # database.append(vec)
 
         # Save to file
         with open('database', 'wb') as f:
