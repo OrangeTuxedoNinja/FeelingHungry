@@ -22,9 +22,9 @@ class Food:
         self.salt_level = salt_level
         self.saturates_level = saturates_level
         self.sugars_level = sugars_level
-        if self.how_healthy() < 6:
+        if self.how_healthy() < 8:
             self.num_leaves = 1
-        elif self.how_healthy() < 10:
+        elif self.how_healthy() < 12:
             self.num_leaves = 2
         else:
             self.num_leaves = 3
@@ -37,7 +37,7 @@ class Food:
         self.image_url = search(type, 1)
 
     def how_healthy(self) -> int:
-        """Returns a numerical value of how healthy an item is between 0-8"""
+        """Returns a numerical value of how healthy an item is between 0-12"""
         def get_level(level: str) -> int:
             """Maps the string descriptions of healthiness to numerical"""
             if level == "green":
@@ -48,4 +48,4 @@ class Food:
                 return 0
             else:
                 raise Exception
-        return get_level(self.fat_level) + get_level(self.sugars_level) + get_level(self.salt_level) + get_level(self.saturates_level)
+        return round(get_level(self.fat_level) + get_level(self.sugars_level) * 1.5 + get_level(self.salt_level) + get_level(self.saturates_level) * 1.5)
