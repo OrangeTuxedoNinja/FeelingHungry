@@ -31,6 +31,7 @@ class FoodProducer:
 
         names = []
         ids = self.ai.search_index(food_name)
+        print("Got ids: " + str(ids))
         _ids = []
         for id in ids:
             f = self.foods[id].name.lower().strip()

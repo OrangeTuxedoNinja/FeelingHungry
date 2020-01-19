@@ -67,12 +67,13 @@ class FoodAi:
     def search_index(self, term: str):
         """Returns 30 recipe indices/ids"""
         terms = term.split(" ")
-        possibilites = []
+        print("Scanning: " + str(terms))
+        possibilities = []
         for t in terms:
             term = self.model.vocab[t]
-            D, I = self.index.search(np.array([term.vector]), 30 // len(terms))
-            possibilites.extend(I[0])
-        return possibilites
+            d, i = self.index.search(np.array([term.vector]), 30 // len(terms))
+            possibilities.extend(i[0])
+        return possibilities
 
 
 if __name__ == '__main__':
