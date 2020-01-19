@@ -7,6 +7,7 @@ import re
 from random import randint
 from imageFinder import *
 
+
 class Food:
     _id_counter = 0
 
@@ -24,16 +25,16 @@ class Food:
         self.sugars_level = sugars_level
         if self.how_healthy() < 8:
             self.num_leaves = 1
-        elif self.how_healthy() < 12:
+        elif self.how_healthy() < 13:
             self.num_leaves = 2
         else:
             self.num_leaves = 3
 
-    def toJson(self) -> str:
+    def to_json(self) -> str:
         return jsonpickle.encode(self)
 
-    def findImage(self, type: str) -> None:
-        """findImage finds an image for this food"""
+    def find_image(self, type: str) -> None:
+        """find_image finds an image for this food"""
         self.image_url = search(type, 1)
 
     def how_healthy(self) -> int:

@@ -43,11 +43,15 @@ class FoodAi:
     def create_database(self):
         """Make xb database using spacy"""
         if os.path.exists('database'):
-             return self.load_database()
+            return self.load_database()
         print("Creating new database...")
         database = []
         all_foods = self.foodprod.foods
+        c = 0
         for recipe in all_foods:
+            c += 1
+            if c % 1000:
+                print("Loaded " + str(c) + "/" + str(len(all_foods)) + " recipes.")
             vec = self.model(recipe.name).vector
             database.append(vec)
 
@@ -65,13 +69,13 @@ class FoodAi:
         return np.array(database)
 
     def search_index(self, term: str):
-        """Returns 30 recipe indices/ids"""
+        """Returns 20 recipe indices/ids"""
         terms = term.split(" ")
         print("Scanning: " + str(terms))
         possibilities = []
         for t in terms:
             term = self.model.vocab[t]
-            d, i = self.index.search(np.array([term.vector]), 30 // len(terms))
+            d, i = self.index.search(np.array([term.vector]), 20 // len(terms))
             possibilities.extend(i[0])
         return possibilities
 
