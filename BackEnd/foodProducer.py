@@ -43,7 +43,7 @@ class FoodProducer:
         ids = _ids
         ids = [(id, self.foods[id].num_leaves) for id in ids] # link id with the health ranking of the foods for sorting
         ids.sort(key=lambda x: x[1]) # sort by healthiness
-        ids = [_id[0] for _id in ids][::-1][:5] # actually get the best five
+        ids = [int(_id[0]) for _id in ids][::-1][:5] # actually get the best five
         found_foods = [self.foods[id] for id in ids] # get the food objects to check if images exist
         for food in found_foods:
             if food.image_url is None:
