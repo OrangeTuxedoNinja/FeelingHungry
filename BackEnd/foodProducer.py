@@ -31,25 +31,25 @@ class FoodProducer:
             return self.cached_foods[food_name]
 
         names = []
-        ids = self.ai.search_index(food_name)
+        ids = self.ai.search_index(food_name) # get closest ids from search algorithm
         print("Got ids: " + str(ids))
         _ids = []
+        # this checks if a food with the same name has already been found
         for id in ids:
             f = self.foods[id].name.lower().strip()
-            if f not in names:
+            if f not in names and f != food_name:
                 _ids.append(id)
                 names.append(f)
         ids = _ids
-        ids = [(id, self.foods[id].num_leaves) for id in ids]
-        ids.sort(key=lambda x: x[1])
-        ids = [int(str(_id[0])) for _id in ids][::-1][:5]
-        found_foods = [self.foods[id] for id in ids]
+        ids = [(id, self.foods[id].num_leaves) for id in ids] # link id with the health ranking of the foods for sorting
+        ids.sort(key=lambda x: x[1]) # sort by healthiness
+        ids = [int(_id[0]) for _id in ids][::-1][:5] # actually get the best five
+        found_foods = [self.foods[id] for id in ids] # get the food objects to check if images exist
         for food in found_foods:
             if food.image_url is None:
                 food.find_image(food.name)
-        self.cached_foods[food_name] = ids
-        # self.save()
-        return self.cached_foods[food_name]
+        self.cached_foods[food_name] = ids # cache the image
+        return self.cached_foods[food_name] # return the cached item
 
     def add_food(self, food_name: str) -> None:
         for new_food in self.crawler.get_food(food_name):
