@@ -10,3 +10,5 @@ Even though none of us had much web development experience, we decided to make t
 We faced significant challenges along the way, including trying to figure out how to get the word vector libraries to work, dealing with CSS, and somehow connecting the front end with the Python back end. In addition, we spent a significant effort optimizing the speed of our machine learning and image search. We used spacy and FAISS to create a database of vector maps to reduce the time spent searching for similar recipes in the database. We also significantly reworked and updated an existing image query API for DuckDuckGo to meet our speed requirements.
 
 Working on this project has been extremely rewarding! We learned so much about machine learning, web development, and server management through copious amounts of Googling and problem solving.
+
+Created at UofTHacks VII.
