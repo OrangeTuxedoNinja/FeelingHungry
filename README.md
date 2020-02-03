@@ -12,3 +12,7 @@ We faced significant challenges along the way, including trying to figure out ho
 Working on this project has been extremely rewarding! We learned so much about machine learning, web development, and server management through copious amounts of Googling and problem solving.
 
 Created at UofTHacks VII.
+
+![Main](screenshots/main.jpg?raw=true "Main Screen")
+![Results](screenshots/results.jpg?raw=true "Results Screen")
+![Info](screenshots/info.jpg?raw=true "Info Screen")
