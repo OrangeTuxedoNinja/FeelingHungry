@@ -6,8 +6,8 @@ import requests
 import urllib.parse
 
 app = Flask(__name__,static_url_path='',  template_folder="../FrontEnd", static_folder="../FrontEnd")
-foodset = FoodProducer()
 CORS(app)
+
 
 # path = "35.203.43.136"
 # local = "127.0.0.1"
@@ -57,4 +57,5 @@ def does_site_load(id: str):
 
 
 if __name__ == '__main__':
+    foodset = FoodProducer()
     app.run(host='0.0.0.0', debug=True, port=80)

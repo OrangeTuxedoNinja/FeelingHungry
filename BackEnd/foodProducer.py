@@ -2,6 +2,7 @@ from typing import List, Optional
 from epicurcrawler import Crawler
 import json
 from mitLoader import MitLoader
+import sys
 
 import os.path
 from food import Food
@@ -30,25 +31,25 @@ class FoodProducer:
             return self.cached_foods[food_name]
 
         names = []
-        ids = self.ai.search_index(food_name)
+        ids = self.ai.search_index(food_name) # get closest ids from search algorithm
         print("Got ids: " + str(ids))
         _ids = []
+        # this checks if a food with the same name has already been found
         for id in ids:
             f = self.foods[id].name.lower().strip()
-            if f not in names:
+            if f not in names and f != food_name:
                 _ids.append(id)
                 names.append(f)
         ids = _ids
-        ids = [(id, self.foods[id].num_leaves) for id in ids]
-        ids.sort(key=lambda x: x[1])
-        ids = [int(str(_id[0])) for _id in ids][::-1][:5]
-        found_foods = [self.foods[id] for id in ids]
+        ids = [(id, self.foods[id].num_leaves) for id in ids] # link id with the health ranking of the foods for sorting
+        ids.sort(key=lambda x: x[1]) # sort by healthiness
+        ids = [int(_id[0]) for _id in ids][::-1][:5] # actually get the best five
+        found_foods = [self.foods[id] for id in ids] # get the food objects to check if images exist
         for food in found_foods:
             if food.image_url is None:
                 food.find_image(food.name)
-        self.cached_foods[food_name] = ids
-        # self.save()
-        return self.cached_foods[food_name]
+        self.cached_foods[food_name] = ids # cache the image
+        return self.cached_foods[food_name] # return the cached item
 
     def add_food(self, food_name: str) -> None:
         for new_food in self.crawler.get_food(food_name):
@@ -68,7 +69,8 @@ class FoodProducer:
             c = 0
             for food in self.foods:
                 c += 1
-                str_food.append(food.to_json())
+                string = food.to_json()
+                str_food.append(string)
                 if len(str_food) % 1000 == 0:
                     print("Jsonified " + str(c) + " recipes for saving!")
             print("Saving: " + str(len(str_food)) + " recipes!")
@@ -86,6 +88,7 @@ class FoodProducer:
 
         with open('foods.json', 'r') as fp:
             x = json.load(fp)
+            print("lines in json: " + str(len(x)))
             for i in x:
                 r = json.loads(i)
                 allow = True
@@ -99,5 +102,9 @@ class FoodProducer:
                         if name[-3:] == "ies":
                             name = name[:-3] + "y"
                         name = name[:-1]
-                    self.foods.append(Food(name, r["image_url"], r["recipe_url"], r["recipe_html"], r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                    self.foods.append(Food(name, r["image_url"], r["recipe_url"], "", r["fat_level"], r["salt_level"], r["saturates_level"], r["sugars_level"]))
+                    continue
+                print("THIS ONE IS NOT SAVED: " + i)
+            else:
+                print("Did not end early!")
         print("Loaded recipes: " + str(len(self.foods)) + " from database")
